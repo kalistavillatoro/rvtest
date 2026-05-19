@@ -11,8 +11,6 @@ export default function Nav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // On home page, transparent until past hero (100vh)
-      // On other pages, always show solid
       if (isHome) {
         setScrolled(window.scrollY > window.innerHeight * 0.8);
       } else {
@@ -24,6 +22,12 @@ export default function Nav() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHome]);
+
+  const navLinks = [
+    { label: 'Framework', href: '/about' },
+    { label: 'Support Model', href: '/offerings' },
+    { label: 'Apply', href: '/apply' },
+  ];
 
   return (
     <nav style={{
@@ -38,7 +42,7 @@ export default function Nav() {
       padding: '24px 48px',
       backgroundColor: scrolled ? 'var(--bg-primary)' : 'transparent',
       borderBottom: scrolled ? '1px solid var(--border)' : 'none',
-      transition: 'background-color 0.4s ease, border-bottom 0.4s ease',
+      transition: 'background-color 0.4s ease',
     }}>
       <Link href="/" style={{
         fontFamily: 'var(--font-mono)',
@@ -52,10 +56,10 @@ export default function Nav() {
       </Link>
 
       <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
-        {['About', 'Offerings', 'Apply'].map((item) => (
+        {navLinks.map((item) => (
           <Link
-            key={item}
-            href={`/${item.toLowerCase()}`}
+            key={item.label}
+            href={item.href}
             style={{
               fontFamily: 'var(--font-sans)',
               fontSize: '13px',
@@ -65,7 +69,7 @@ export default function Nav() {
               textDecoration: 'none',
             }}
           >
-            {item}
+            {item.label}
           </Link>
         ))}
       </div>

@@ -36,6 +36,7 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 18px;
 }
 
 a {
@@ -59,6 +60,18 @@ button, input, select, textarea {
   transform: translateY(0);
 }
 
+/* Ken Burns hero animation */
+@keyframes kenBurns {
+  0%   { transform: scale(1.00); }
+  50%  { transform: scale(1.04); }
+  100% { transform: scale(1.00); }
+}
+
+.hero-image-animate {
+  animation: kenBurns 16s var(--ease-out-expo) infinite;
+  transform-origin: center 30%;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
   .apply-grid {
@@ -69,5 +82,9 @@ button, input, select, textarea {
   }
   .nav-inner {
     padding: 16px 24px !important;
+  }
+  .hero-text-block {
+    left: 24px !important;
+    max-width: calc(100vw - 48px) !important;
   }
 }

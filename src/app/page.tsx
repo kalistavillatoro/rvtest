@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Fade-up observer hook
 function useFadeUp() {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -35,21 +34,32 @@ function useFadeUp() {
 
 const sportsWords = [
   { text: 'Rowing', size: 72 },
-  { text: 'Athletics', size: 52 },
-  { text: 'Swimming', size: 60 },
-  { text: 'Tennis', size: 44 },
-  { text: 'Golf', size: 42 },
-  { text: 'Volleyball', size: 36 },
+  { text: 'Soccer', size: 58 },
+  { text: 'Swimming', size: 62 },
+  { text: 'Basketball', size: 46 },
+  { text: 'Tennis', size: 52 },
+  { text: 'Lacrosse', size: 44 },
+  { text: 'Running', size: 56 },
+  { text: 'Golf', size: 40 },
+  { text: 'Football', size: 50 },
+  { text: 'Field Hockey', size: 42 },
+  { text: 'Volleyball', size: 48 },
+  { text: 'Ice Hockey', size: 44 },
+  { text: 'Track & Field', size: 38 },
+  { text: 'Cross Country', size: 36 },
 ];
 
 const countryWords = [
+  { text: 'United States', size: 62 },
   { text: 'Australia', size: 64 },
+  { text: 'United Kingdom', size: 52 },
+  { text: 'Canada', size: 56 },
   { text: 'Singapore', size: 48 },
-  { text: 'United Arab Emirates', size: 38 },
-  { text: 'United Kingdom', size: 56 },
-  { text: 'Hong Kong', size: 44 },
-  { text: 'Canada', size: 52 },
-  { text: 'New Zealand', size: 42 },
+  { text: 'United Arab Emirates', size: 36 },
+  { text: 'Mexico', size: 52 },
+  { text: 'New Zealand', size: 44 },
+  { text: 'Hong Kong', size: 46 },
+  { text: 'Japan', size: 50 },
 ];
 
 const outcomeWords = [
@@ -124,7 +134,7 @@ function AnimatedWord({
         cursor: 'default',
         textDecoration,
         textDecorationColor,
-        transition: hovered ? 'none' : 'color 1.8s ease',
+        transition: hovered ? 'none' : 'color 1.2s ease',
         userSelect: 'none',
       }}
     >
@@ -185,20 +195,20 @@ export default function HomePage() {
       fadeInterval = setInterval(() => {
         setHighlighted((prev) => {
           if (!prev) return null;
-          const nextOp = prev.opacity - 0.05;
+          const nextOp = prev.opacity - 0.06;
           if (nextOp <= 0) {
             clearInterval(fadeInterval);
             return null;
           }
           return { ...prev, opacity: nextOp };
         });
-      }, 50);
+      }, 40);
 
       cycleTimeout = setTimeout(() => {
         clearInterval(fadeInterval);
         setHighlighted(null);
-        cycleTimeout = setTimeout(pickAndHighlight, 200);
-      }, 2200);
+        cycleTimeout = setTimeout(pickAndHighlight, 150);
+      }, 1500);
     }
 
     const startTimer = setTimeout(pickAndHighlight, 500);
@@ -220,31 +230,36 @@ export default function HomePage() {
           fill
           priority
           sizes="100vw"
+          className="hero-image-animate"
           style={{
             objectFit: 'cover',
             objectPosition: 'center 30%',
-            filter: 'brightness(0.88) saturate(0.9)',
+            filter: 'brightness(0.92) contrast(1.05) saturate(0.95)',
           }}
         />
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '12px',
-          opacity: heroVisible ? 1 : 0,
-          transition: 'opacity 1s ease',
-        }}>
+
+        <div
+          className="hero-text-block"
+          style={{
+            position: 'absolute',
+            left: '7vw',
+            top: '50%',
+            transform: 'translateY(-58%)',
+            maxWidth: '520px',
+            opacity: heroVisible ? 1 : 0,
+            transition: 'opacity 1s ease',
+          }}
+        >
           <h1 style={{
             fontFamily: 'var(--font-serif)',
             fontWeight: 300,
-            fontSize: 'clamp(48px, 8vw, 80px)',
+            fontSize: 'clamp(44px, 5.5vw, 68px)',
             color: 'var(--accent-ivory)',
             letterSpacing: '0.1em',
-            textAlign: 'center',
+            textAlign: 'left',
+            lineHeight: 1.05,
             margin: 0,
+            marginBottom: '16px',
           }}>
             RECRUITING VICTORY
           </h1>
@@ -252,12 +267,14 @@ export default function HomePage() {
             fontFamily: 'var(--font-serif)',
             fontWeight: 300,
             fontStyle: 'italic',
-            fontSize: '22px',
-            color: 'var(--text-secondary)',
-            textAlign: 'center',
+            fontSize: 'clamp(17px, 1.6vw, 21px)',
+            color: '#C8C4BB',
+            textAlign: 'left',
             margin: 0,
+            lineHeight: 1.5,
+            letterSpacing: '0.02em',
           }}>
-            Elite pathways for student-athletes pursuing U.S. universities.
+            Structured pathways for student-athletes pursuing U.S. collegiate programs.
           </p>
         </div>
       </section>
@@ -284,9 +301,19 @@ export default function HomePage() {
             fontSize: '18px',
             lineHeight: 1.8,
             color: 'var(--text-secondary)',
+            marginBottom: '28px',
+          }}>
+            Most families enter the U.S. college athletic recruiting process without a clear sense of when it begins, who drives it, or how institutions evaluate candidates beyond performance alone. The result is a fragmented, reactive experience that disadvantages high-performing athletes — not for lack of ability, but for lack of structure.
+          </p>
+          <p className="fade-up" style={{
+            fontFamily: 'var(--font-sans)',
+            fontWeight: 300,
+            fontSize: '18px',
+            lineHeight: 1.8,
+            color: 'var(--text-secondary)',
             marginBottom: '64px',
           }}>
-            Most families enter the U.S. college athletic recruiting process without a clear sense of when it begins, who drives it, or how institutions evaluate candidates beyond performance alone. The result is a fragmented, reactive experience that disadvantages high-performing athletes — not for lack of ability, but for lack of structure. Recruiting Victory provides that structure: a disciplined, individually calibrated framework that helps student-athletes at every stage move through the recruiting process with clarity, confidence, and a competitive position that reflects the full scope of who they are.
+            Recruiting Victory provides that structure: a disciplined, individually calibrated framework that helps student-athletes at every stage move through the recruiting process with clarity, confidence, and a competitive position that reflects the full scope of who they are.
           </p>
           <div className="fade-up" style={{
             borderTop: '1px solid var(--border)',
@@ -298,7 +325,7 @@ export default function HomePage() {
             letterSpacing: '0.12em',
             color: 'var(--text-muted)',
           }}>
-            Powered by CAPS Global · The Institutional Standard for High School Athletic Recruiting Systems
+            Powered by CAPS (College Athlete Placement Standard) · The Institutional Standard for High School Athletic Recruiting Systems
           </div>
         </div>
       </section>
@@ -324,45 +351,21 @@ export default function HomePage() {
           gridTemplateColumns: '1fr 1fr 1fr',
           gap: '48px',
         }}>
-          {/* Block 1 — Sports, left-aligned */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {sportsWords.map((w, i) => (
-              <AnimatedWord
-                key={w.text}
-                word={w}
-                block={0}
-                index={i}
-                highlighted={highlighted}
-                align="left"
-              />
+              <AnimatedWord key={w.text} word={w} block={0} index={i} highlighted={highlighted} align="left" />
             ))}
           </div>
 
-          {/* Block 2 — Countries, center-aligned */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'center' }}>
             {countryWords.map((w, i) => (
-              <AnimatedWord
-                key={w.text}
-                word={w}
-                block={1}
-                index={i}
-                highlighted={highlighted}
-                align="center"
-              />
+              <AnimatedWord key={w.text} word={w} block={1} index={i} highlighted={highlighted} align="center" />
             ))}
           </div>
 
-          {/* Block 3 — Outcomes, right-aligned */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-end' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-end' }}>
             {outcomeWords.map((w, i) => (
-              <AnimatedWord
-                key={w.text}
-                word={w}
-                block={2}
-                index={i}
-                highlighted={highlighted}
-                align="right"
-              />
+              <AnimatedWord key={w.text} word={w} block={2} index={i} highlighted={highlighted} align="right" />
             ))}
           </div>
         </div>

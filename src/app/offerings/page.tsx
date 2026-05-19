@@ -64,17 +64,17 @@ const levels = [
   {
     label: 'Orientation',
     title: 'Foundational Resources',
-    text: 'Self-guided tools designed to help families understand the recruiting process, timelines, and expectations. This level is ideal for early-stage athletes who are beginning to explore college recruiting and want clarity before engaging in direct support.',
+    text: 'Self-guided tools designed to help families understand the recruiting process, timelines, and expectations. This level is intended for early-stage athletes who are beginning to explore college recruiting and want clarity before engaging in direct support.',
   },
   {
     label: 'Guided Progression',
     title: 'Small-Group Cohorts',
-    text: 'Advisor-led groups of athletes progressing through the recruiting cycle together. Cohorts include structured sessions, shared milestones, and individual feedback. Some cohorts are organized by sport or school profile when appropriate.',
+    text: 'Advisor-led cohorts of athletes progressing through the recruiting cycle together. Each cohort includes structured sessions, shared milestones, and individualized feedback. Some cohorts are organized by sport or recruiting profile when appropriate.',
   },
   {
     label: 'Acceleration',
     title: 'Private Advisory',
-    text: 'One-to-one strategic support for athletes and families who require a fully individualized recruiting plan. This includes positioning, outreach strategy, profile development, school targeting, communication support, and ongoing decision guidance through the commitment process. Highly limited availability.',
+    text: 'One-to-one strategic support for athletes and families requiring a fully individualized recruiting plan. This includes positioning, outreach strategy, profile development, school targeting, communication support, and ongoing decision guidance through the commitment process. Availability is intentionally limited.',
   },
 ];
 
@@ -100,7 +100,7 @@ export default function OfferingsPage() {
           <h1 style={{
             fontFamily: 'var(--font-serif)',
             fontWeight: 300,
-            fontSize: '60px',
+            fontSize: 'clamp(40px, 5vw, 60px)',
             color: 'var(--text-primary)',
             lineHeight: 1.05,
             marginBottom: '40px',
@@ -119,7 +119,7 @@ export default function OfferingsPage() {
           maxWidth: '580px',
           marginBottom: '48px',
         }}>
-          We work across three levels of support. The appropriate level for each athlete is determined during the application and review process, based on sport, timeline, and recruiting readiness.
+          Support is structured across three levels. Each athlete is evaluated individually before a recommended level of support is made, based on sport, timeline, and recruiting readiness.
         </p>
 
         {/* Separator */}
@@ -135,7 +135,7 @@ export default function OfferingsPage() {
           textAlign: 'center',
           margin: '0 0 48px',
         }}>
-          We do not assign families to programs. We evaluate each athlete individually and recommend the appropriate level of support.
+          We do not assign families to programs. Every recommendation is made through an individual review process.
         </div>
 
         {/* Three Levels */}

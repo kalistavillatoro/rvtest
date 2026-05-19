@@ -37,7 +37,7 @@ export default function AboutPage() {
     <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', paddingTop: '120px', paddingBottom: '120px' }}>
       <div ref={pageRef} style={{ maxWidth: '680px', margin: '0 auto', padding: '0 24px' }}>
 
-        {/* Section A */}
+        {/* Section A — Header */}
         <div style={{ marginBottom: '80px' }}>
           <div className="fade-up" style={{
             fontFamily: 'var(--font-mono)',
@@ -52,7 +52,7 @@ export default function AboutPage() {
           <h1 className="fade-up" style={{
             fontFamily: 'var(--font-serif)',
             fontWeight: 300,
-            fontSize: '64px',
+            fontSize: 'clamp(42px, 6vw, 64px)',
             color: 'var(--text-primary)',
             lineHeight: 1.05,
             marginBottom: '40px',
@@ -62,7 +62,7 @@ export default function AboutPage() {
           <div className="fade-up" style={{ borderTop: '1px solid var(--border)' }} />
         </div>
 
-        {/* Section B */}
+        {/* Section B — Founding Story */}
         <div className="fade-up" style={{ marginBottom: '80px' }}>
           <p style={{
             fontFamily: 'var(--font-sans)',
@@ -72,7 +72,7 @@ export default function AboutPage() {
             color: 'var(--text-secondary)',
             marginBottom: '28px',
           }}>
-            Recruiting Victory was founded by a Division I athlete who was herself recruited internationally to compete at the Ivy League level. That experience — navigating a system with no roadmap, across borders, across sports, across admission standards that required simultaneous academic and athletic precision — became the foundation of what this platform offers.
+            Recruiting Victory was founded by a Division I athlete who was recruited by five universities within the Ivy League system. That experience — navigating a process with no clear roadmap across time zones, timelines, academic expectations, and athletic standards — became the foundation for what this platform now provides to student-athletes across all levels of collegiate sport in the United States.
           </p>
           <p style={{
             fontFamily: 'var(--font-sans)',
@@ -82,7 +82,7 @@ export default function AboutPage() {
             color: 'var(--text-secondary)',
             marginBottom: '28px',
           }}>
-            After six years of working directly with student-athletes and alongside high schools to understand where the process breaks down, a clear pattern emerged: the athletes who struggled were rarely under-qualified. They were under-prepared for a system that rewards structure, timing, and positioning over raw talent alone.
+            Over time, through direct work with student-athletes and partnerships with schools, a consistent pattern emerged: the athletes who struggled most were rarely lacking ability. More often, they lacked structure, timing, positioning, and informed guidance within a process that quietly rewards all four.
           </p>
           <p style={{
             fontFamily: 'var(--font-sans)',
@@ -91,7 +91,7 @@ export default function AboutPage() {
             lineHeight: 1.85,
             color: 'var(--text-secondary)',
           }}>
-            Recruiting Victory exists to correct that.
+            Recruiting Victory was built to bring clarity and discipline to that process — helping athletes present not only their performance, but the full scope of who they are, what they value, and where they fit best.
           </p>
         </div>
 
@@ -115,7 +115,27 @@ export default function AboutPage() {
             color: 'var(--text-muted)',
             marginBottom: '20px',
           }}>
-            Recruiting Victory operates in partnership with CAPS Global — the College Athlete Placement Standard — a certification and training program for high schools worldwide. Schools partner with CAPS to build and formalize their own athletic recruiting infrastructure. Recruiting Victory serves individual athletes and families navigating that same landscape from the student side. Together, they represent a complete ecosystem: institutional systems for schools, and individual advisory for athletes.
+            Recruiting Victory operates alongside CAPS (College Athlete Placement Standard) — an institutional framework designed to help high schools formalize and strengthen their athletic recruiting infrastructure.
+          </p>
+          <p style={{
+            fontFamily: 'var(--font-sans)',
+            fontWeight: 300,
+            fontSize: '16px',
+            lineHeight: 1.85,
+            color: 'var(--text-muted)',
+            marginBottom: '20px',
+          }}>
+            While CAPS supports schools at the systems level, Recruiting Victory works directly with student-athletes and families navigating that same landscape from the individual side.
+          </p>
+          <p style={{
+            fontFamily: 'var(--font-sans)',
+            fontWeight: 300,
+            fontSize: '16px',
+            lineHeight: 1.85,
+            color: 'var(--text-muted)',
+            marginBottom: '24px',
+          }}>
+            Together, they represent a connected ecosystem: institutional structure for schools, and individualized strategic guidance for athletes.
           </p>
           <a
             href="https://www.capsglobal.org"
@@ -129,7 +149,7 @@ export default function AboutPage() {
               textDecoration: 'none',
             }}
           >
-            Learn about CAPS Global →
+            Learn about CAPS →
           </a>
         </div>
 
@@ -146,14 +166,34 @@ export default function AboutPage() {
             Experience Across
           </div>
           <p style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.12em',
+            color: 'var(--text-muted)',
+            marginBottom: '12px',
+          }}>
+            Sports
+          </p>
+          <p style={{
             fontFamily: 'var(--font-sans)',
             fontWeight: 300,
             fontSize: '15px',
             lineHeight: 1.8,
             color: 'var(--text-secondary)',
+            marginBottom: '28px',
+          }}>
+            Rowing · Running · Swimming · Tennis · Basketball · Soccer · Golf · Volleyball · Hockey · Field Hockey · Lacrosse · Track &amp; Field · Cross Country · Football · and others
+          </p>
+          <p style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.12em',
+            color: 'var(--text-muted)',
             marginBottom: '12px',
           }}>
-            Sports: Rowing · Athletics · Swimming · Tennis · Golf · Volleyball · and others
+            Regions
           </p>
           <p style={{
             fontFamily: 'var(--font-sans)',
@@ -162,7 +202,7 @@ export default function AboutPage() {
             lineHeight: 1.8,
             color: 'var(--text-secondary)',
           }}>
-            Regions: Australia · Singapore · UAE · United Kingdom · Canada · New Zealand · Hong Kong
+            Australia · Singapore · United Arab Emirates · United Kingdom · United States · Mexico · Canada · New Zealand · Hong Kong
           </p>
         </div>
 
@@ -186,7 +226,7 @@ export default function AboutPage() {
             color: 'var(--text-muted)',
             marginBottom: '24px',
           }}>
-            Athletes who have moved through this process have gone on to engage with programs across:
+            Athletes supported through this process have gone on to engage with programs across a wide range of collegiate environments, including:
           </p>
           <div style={{
             display: 'grid',
@@ -195,14 +235,14 @@ export default function AboutPage() {
             marginBottom: '32px',
           }}>
             {[
-              'Ivy League programs (Yale, Princeton, Columbia, Dartmouth, Brown)',
-              'Power Four Division I programs (Stanford, Duke, Michigan, Northwestern)',
-              'Division II & III programs across all regions',
-              'Scholarship and preferred walk-on offers',
+              'Ivy League institutions such as Yale University, Princeton University, Columbia University, Dartmouth College, and Brown University',
+              'Power Four Division I programs including Stanford University, Duke University, University of Michigan, and Northwestern University',
+              'Division II and III programs across multiple regions',
+              'Scholarship opportunities and preferred walk-on placements',
             ].map((item) => (
               <div key={item} style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '13px',
+                fontSize: '12px',
                 color: 'var(--text-ghost)',
                 lineHeight: 1.6,
               }}>
@@ -217,7 +257,7 @@ export default function AboutPage() {
             lineHeight: 1.7,
             color: 'var(--text-ghost)',
           }}>
-            These outcomes are presented as context, not as a guarantee or measure of success. Every athlete&apos;s path is individual.
+            These outcomes are presented as context rather than promise. Every athlete&apos;s pathway, priorities, and opportunities are different.
           </p>
         </div>
 

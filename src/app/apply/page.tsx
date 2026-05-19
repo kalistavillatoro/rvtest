@@ -56,12 +56,13 @@ function FormField({
   );
 }
 
-function FocusInput({ type = 'text', placeholder = '' }: { type?: string; placeholder?: string }) {
+function FocusInput({ type = 'text', name, required = false }: { type?: string; name: string; required?: boolean }) {
   const [focused, setFocused] = useState(false);
   return (
     <input
       type={type}
-      placeholder={placeholder}
+      name={name}
+      required={required}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
       style={{
@@ -73,12 +74,15 @@ function FocusInput({ type = 'text', placeholder = '' }: { type?: string; placeh
   );
 }
 
-function FocusSelect({ options }: { options: string[] }) {
+function FocusSelect({ options, name, required = false }: { options: string[]; name: string; required?: boolean }) {
   const [focused, setFocused] = useState(false);
   return (
     <select
+      name={name}
+      required={required}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
+      defaultValue=""
       style={{
         ...inputStyle,
         borderColor: focused ? 'var(--accent-forest)' : 'var(--border-input)',
@@ -87,7 +91,7 @@ function FocusSelect({ options }: { options: string[] }) {
         cursor: 'pointer',
       }}
     >
-      <option value="" disabled selected>Select...</option>
+      <option value="" disabled>Select...</option>
       {options.map((opt) => (
         <option key={opt} value={opt}>{opt}</option>
       ))}
@@ -95,11 +99,13 @@ function FocusSelect({ options }: { options: string[] }) {
   );
 }
 
-function FocusTextarea({ rows = 3, placeholder = '' }: { rows?: number; placeholder?: string }) {
+function FocusTextarea({ rows = 3, placeholder = '', name, required = false }: { rows?: number; placeholder?: string; name: string; required?: boolean }) {
   const [focused, setFocused] = useState(false);
   return (
     <textarea
       rows={rows}
+      name={name}
+      required={required}
       placeholder={placeholder}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
@@ -116,18 +122,92 @@ function FocusTextarea({ rows = 3, placeholder = '' }: { rows?: number; placehol
 
 export default function ApplyPage() {
   const [submitHovered, setSubmitHovered] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus('submitting');
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch('https://formspree.io/f/xyzwpwgr', {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (res.ok) {
+        setStatus('success');
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
+  }
+
+  if (status === 'success') {
+    return (
+      <div style={{
+        backgroundColor: 'var(--bg-primary)',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '24px',
+      }}>
+        <div style={{ textAlign: 'center', maxWidth: '480px' }}>
+          <span style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.18em',
+            color: 'var(--accent-forest)',
+            display: 'block',
+            marginBottom: '24px',
+          }}>
+            Application Received
+          </span>
+          <h1 style={{
+            fontFamily: 'var(--font-serif)',
+            fontWeight: 300,
+            fontSize: '52px',
+            color: 'var(--text-primary)',
+            marginBottom: '24px',
+            lineHeight: 1.1,
+          }}>
+            Thank you.
+          </h1>
+          <p style={{
+            fontFamily: 'var(--font-sans)',
+            fontWeight: 300,
+            fontSize: '16px',
+            color: 'var(--text-muted)',
+            lineHeight: 1.85,
+          }}>
+            We review every submission personally and will respond within 3–5 business days with a recommended next step.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', paddingTop: '120px', paddingBottom: '120px' }}>
-      <div style={{
-        maxWidth: '1100px',
-        margin: '0 auto',
-        padding: '0 48px',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1.5fr',
-        gap: '80px',
-        alignItems: 'start',
-      }}>
+      <div
+        style={{
+          maxWidth: '1100px',
+          margin: '0 auto',
+          padding: '0 48px',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1.5fr',
+          gap: '80px',
+          alignItems: 'start',
+        }}
+        className="apply-grid"
+      >
 
         {/* Left Column */}
         <div style={{ position: 'sticky', top: '140px' }}>
@@ -169,7 +249,7 @@ export default function ApplyPage() {
             letterSpacing: '0.1em',
             color: 'var(--text-ghost)',
           }}>
-            Recruiting Victory · Powered by CAPS Global
+            Recruiting Victory · Powered by CAPS (College Athlete Placement Standard)
           </div>
         </div>
 
@@ -180,52 +260,66 @@ export default function ApplyPage() {
           border: '1px solid var(--border)',
           borderRadius: 0,
         }}>
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={handleSubmit}>
 
             <FormField label="Athlete's full name">
-              <FocusInput />
+              <FocusInput name="athlete_name" required />
             </FormField>
 
             <FormField label="Country of residence">
-              <FocusInput />
+              <FocusInput name="country" required />
             </FormField>
 
             <FormField label="Sport">
-              <FocusInput />
+              <FocusInput name="sport" required />
             </FormField>
 
             <FormField label="Graduation year">
-              <FocusSelect options={['2025', '2026', '2027', '2028', '2029', '2030', 'Post-grad']} />
+              <FocusSelect
+                name="graduation_year"
+                required
+                options={['2025', '2026', '2027', '2028', '2029', '2030', 'Post-grad']}
+              />
             </FormField>
 
             <FormField
               label="Current school (optional)"
               subLabel="We use this to understand your current environment, not to contact your school."
             >
-              <FocusInput />
+              <FocusInput name="current_school" />
             </FormField>
 
             <FormField label="Academic pathway">
-              <FocusSelect options={[
-                'Strong academic focus',
-                'Balanced athlete-academic',
-                'Athletic-primary',
-                'Unsure',
-              ]} />
+              <FocusSelect
+                name="academic_pathway"
+                required
+                options={[
+                  'Strong academic focus',
+                  'Balanced athlete-academic',
+                  'Athletic-primary',
+                  'Unsure',
+                ]}
+              />
             </FormField>
 
             <FormField label="Where are you in the recruiting process?">
-              <FocusSelect options={[
-                "Haven't started",
-                'Early research stage',
-                'Actively reaching out',
-                'In conversations with coaches',
-                'Other',
-              ]} />
+              <FocusSelect
+                name="recruiting_stage"
+                required
+                options={[
+                  "Haven't started",
+                  'Early research stage',
+                  'Actively reaching out',
+                  'In conversations with coaches',
+                  'Other',
+                ]}
+              />
             </FormField>
 
             <FormField label="Brief athletic background">
               <FocusTextarea
+                name="athletic_background"
+                required
                 rows={3}
                 placeholder="Level competed, notable results, current training environment."
               />
@@ -233,25 +327,28 @@ export default function ApplyPage() {
 
             <FormField label="What would a meaningful outcome look like?">
               <FocusTextarea
+                name="meaningful_outcome"
+                required
                 rows={3}
                 placeholder="There is no right answer. We use this to understand what you're working toward."
               />
             </FormField>
 
             <FormField label="Email address">
-              <FocusInput type="email" />
+              <FocusInput name="email" type="email" required />
             </FormField>
 
             <FormField label="Parent / guardian name (optional)">
-              <FocusInput />
+              <FocusInput name="guardian_name" />
             </FormField>
 
             <FormField label="How did you hear about Recruiting Victory? (optional)">
-              <FocusInput />
+              <FocusInput name="referral_source" />
             </FormField>
 
             <button
               type="submit"
+              disabled={status === 'submitting'}
               onMouseEnter={() => setSubmitHovered(true)}
               onMouseLeave={() => setSubmitHovered(false)}
               style={{
@@ -267,13 +364,27 @@ export default function ApplyPage() {
                 textTransform: 'uppercase',
                 border: 'none',
                 borderRadius: 0,
-                cursor: 'pointer',
+                cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
+                opacity: status === 'submitting' ? 0.7 : 1,
                 transition: 'background-color 0.3s ease',
                 marginBottom: '20px',
               }}
             >
-              Submit Application
+              {status === 'submitting' ? 'Submitting...' : 'Submit Application'}
             </button>
+
+            {status === 'error' && (
+              <p style={{
+                fontFamily: 'var(--font-sans)',
+                fontWeight: 300,
+                fontSize: '13px',
+                color: '#C17B7B',
+                textAlign: 'center',
+                marginBottom: '12px',
+              }}>
+                Something went wrong. Please try again or email us directly at caps@capsglobal.org
+              </p>
+            )}
 
             <p style={{
               fontFamily: 'var(--font-sans)',
