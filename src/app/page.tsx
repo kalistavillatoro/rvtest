@@ -161,6 +161,7 @@ function useFadeUp() {
 
 export default function HomePage() {
   const heroSectionRef = useRef<HTMLDivElement>(null);
+  const img1Ref        = useRef<HTMLImageElement>(null);
   const img2WrapperRef = useRef<HTMLDivElement>(null);
   const [highlighted,  setHighlighted]  = useState<HighlightedWord | null>(null);
   const [heroVisible,  setHeroVisible]  = useState(false);
@@ -205,11 +206,17 @@ export default function HomePage() {
       const scrollable = section.offsetHeight - window.innerHeight;
       if (scrollable <= 0) return;
       const raw = Math.min(1, window.scrollY / scrollable);
-      // Image 1 holds until 83% scroll. Transition completes at 95%.
-      const onset    = 0.83;
-      const window_  = 0.12;
-      const delayed  = Math.max(0, (raw - onset) / window_);
-      target = smoothstep(delayed);
+
+      // Subtle zoom on image 1 as you scroll (1.0 → 1.03) — gives
+      // immediate visual feedback that scroll is doing something.
+      if (img1Ref.current) {
+        img1Ref.current.style.transform = `scale(${1 + raw * 0.03})`;
+      }
+
+      // Image 2 fades in only in the final 15% of hero scroll.
+      const onset   = 0.85;
+      const window_ = 0.15;
+      target = smoothstep(Math.max(0, (raw - onset) / window_));
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -256,16 +263,17 @@ export default function HomePage() {
   return (
     <>
       {/* ═══════════════════════════════════════════════════════════
-          SECTION 1 — HERO  (300vh sticky scroll container)
-          Image 1 stays fully visible for most of the scroll;
-          Image 2 fades in only in the final ~12% of hero scroll.
+          SECTION 1 — HERO  (200vh sticky scroll container)
+          Scrolling immediately produces a subtle zoom on image 1.
+          Image 2 fades in only in the final 15% of hero scroll.
       ════════════════════════════════════════════════════════════ */}
-      <div ref={heroSectionRef} style={{ height: '300vh', position: 'relative' }}>
+      <div ref={heroSectionRef} style={{ height: '200vh', position: 'relative' }}>
         <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
 
-          {/* ── Image 1 — base (stays visible until very end) ── */}
+          {/* ── Image 1 — base; subtle scroll-driven zoom via ref ── */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
+            ref={img1Ref}
             src="/Rowing 2 - green.jpg"
             alt=""
             aria-hidden="true"
@@ -274,6 +282,8 @@ export default function HomePage() {
               width: '100%', height: '100%',
               objectFit: 'cover', objectPosition: 'center 30%',
               filter: 'brightness(0.90) contrast(1.06)',
+              transformOrigin: 'center 30%',
+              willChange: 'transform',
             }}
           />
 
