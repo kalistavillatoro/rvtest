@@ -103,8 +103,19 @@ button, input, select, textarea { border-radius: 0 !important; }
   .nav-desktop-links { display: none !important; }
   .nav-hamburger    { display: flex !important; }
 
-  /* Hero */
-  .hero-text-block  { right: 24px !important; left: auto !important; max-width: calc(100vw - 48px) !important; }
+  /* Hero subtitle — top-right corner on mobile, narrow, editorial */
+  .hero-text-block {
+    right: 20px !important;
+    left: auto !important;
+    top: 18% !important;
+    transform: none !important;
+    max-width: 160px !important;
+  }
+  .hero-text-block p {
+    font-size: 14px !important;
+    line-height: 1.55 !important;
+    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.72) !important;
+  }
 
   /* Apply form box */
   .apply-form-box   { padding: 32px 24px !important; }
