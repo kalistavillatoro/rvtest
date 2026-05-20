@@ -210,7 +210,7 @@ export default function ApplyPage() {
       >
 
         {/* Left Column */}
-        <div style={{ position: 'sticky', top: '140px' }}>
+        <div className="apply-left-col" style={{ position: 'sticky', top: '140px' }}>
           <div style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '11px',
