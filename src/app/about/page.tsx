@@ -26,7 +26,7 @@ export default function AboutPage() {
   const pageRef = useFadeUp();
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', paddingTop: '120px', paddingBottom: '140px' }}>
+    <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', paddingTop: 'clamp(80px, 15vw, 120px)', paddingBottom: 'clamp(80px, 12vw, 140px)' }}>
       <div ref={pageRef} style={{ maxWidth: '680px', margin: '0 auto', padding: '0 24px' }}>
 
         {/* ── Header ── */}
@@ -174,7 +174,7 @@ export default function AboutPage() {
           }}>
             Athletes supported through this process have gone on to engage with programs across a wide range of collegiate environments, including:
           </p>
-          <div className="fade-up" data-delay="180" style={{
+          <div className="fade-up outcomes-grid" data-delay="180" style={{
             display: 'grid', gridTemplateColumns: '1fr 1fr',
             gap: '16px', marginBottom: '32px',
           }}>

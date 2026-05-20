@@ -349,7 +349,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════
           SECTION 2 — CONTEXT PARAGRAPH
       ════════════════════════════════════════════════════════════ */}
-      <section style={{ backgroundColor: 'var(--bg-primary)', padding: '120px 24px' }}>
+      <section style={{ backgroundColor: 'var(--bg-primary)', padding: 'clamp(72px, 10vw, 120px) 24px' }}>
         <div ref={contextRef} style={{ maxWidth: '640px', margin: '0 auto' }}>
           <div className="fade-up" data-delay="0" style={{
             fontFamily: 'var(--font-mono)', fontSize: '11px',
@@ -389,7 +389,7 @@ export default function HomePage() {
           as one column), so everyone sees their sport. Smaller text
           to fit; approximately same visual height as other columns.
       ════════════════════════════════════════════════════════════ */}
-      <section style={{ backgroundColor: 'var(--bg-primary)', padding: '140px 5vw 120px' }}>
+      <section style={{ backgroundColor: 'var(--bg-primary)', padding: 'clamp(72px, 10vw, 140px) 5vw clamp(60px, 8vw, 120px)' }}>
         <div style={{
           fontFamily: 'var(--font-mono)', fontSize: '11px',
           textTransform: 'uppercase', letterSpacing: '0.14em',
@@ -398,7 +398,7 @@ export default function HomePage() {
           Reach · Sport · Outcome
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '32px', alignItems: 'start' }}>
+        <div className="anim-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '32px', alignItems: 'start' }}>
 
           {/* Block 1 — Sports (2 sub-columns inside 1 column) */}
           <div>
@@ -441,7 +441,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════
           SECTION 4 — APPLY CTA BAND
       ════════════════════════════════════════════════════════════ */}
-      <section style={{ backgroundColor: 'var(--bg-secondary)', padding: '100px 24px', textAlign: 'center' }}>
+      <section style={{ backgroundColor: 'var(--bg-secondary)', padding: 'clamp(64px, 8vw, 100px) 24px', textAlign: 'center' }}>
         <div ref={ctaRef}>
           <div className="fade-up" data-delay="0" style={{
             fontFamily: 'var(--font-mono)', fontSize: '11px',

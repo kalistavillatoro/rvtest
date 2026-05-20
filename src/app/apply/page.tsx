@@ -195,7 +195,7 @@ export default function ApplyPage() {
   }
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', paddingTop: '120px', paddingBottom: '120px' }}>
+    <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', paddingTop: 'clamp(80px, 15vw, 120px)', paddingBottom: 'clamp(60px, 10vw, 120px)' }}>
       <div
         style={{
           maxWidth: '1100px',
@@ -254,7 +254,7 @@ export default function ApplyPage() {
         </div>
 
         {/* Right Column — Form */}
-        <div style={{
+        <div className="apply-form-box" style={{
           backgroundColor: 'var(--bg-secondary)',
           padding: '48px',
           border: '1px solid var(--border)',
