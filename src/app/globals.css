@@ -96,5 +96,5 @@ button, input, select, textarea { border-radius: 0 !important; }
   .apply-grid  { grid-template-columns: 1fr !important; }
   .anim-grid   { grid-template-columns: 1fr !important; }
   .nav-inner   { padding: 16px 24px !important; }
-  .hero-text-block { left: 24px !important; max-width: calc(100vw - 48px) !important; }
+  .hero-text-block { right: 24px !important; left: auto !important; max-width: calc(100vw - 48px) !important; }
 }

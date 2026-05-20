@@ -321,7 +321,7 @@ export default function HomePage() {
             className="hero-text-block"
             style={{
               position: 'absolute',
-              left: '7vw',
+              right: '7vw',
               top: '40%',
               transform: 'translateY(-50%)',
               maxWidth: '420px',
@@ -331,10 +331,10 @@ export default function HomePage() {
           >
             <p style={{
               fontFamily: 'var(--font-serif)',
-              fontWeight: 300,
-              fontSize: 'clamp(22px, 2.2vw, 30px)',
+              fontWeight: 400,
+              fontSize: 'clamp(24px, 2.5vw, 34px)',
               color: 'var(--accent-ivory)',
-              textAlign: 'left',
+              textAlign: 'right',
               margin: 0,
               lineHeight: 1.45,
               letterSpacing: '0.01em',
