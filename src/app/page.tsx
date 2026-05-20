@@ -3,36 +3,36 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-// ─── Sports: 24 NCAA sports at small uniform size — displayed in 2 sub-cols ──
+// ─── Sports: Rowing featured large; others scaled for editorial rhythm ───────
 const sportsWords = [
-  { text: 'Rowing',        size: 20 },
-  { text: 'Swimming',      size: 20 },
-  { text: 'Soccer',        size: 20 },
-  { text: 'Running',       size: 20 },
-  { text: 'Basketball',    size: 20 },
+  { text: 'Rowing',        size: 38 },  // flagship — prominently bigger
+  { text: 'Swimming',      size: 24 },
+  { text: 'Soccer',        size: 26 },
+  { text: 'Running',       size: 22 },
+  { text: 'Basketball',    size: 22 },
   { text: 'Field Hockey',  size: 20 },
-  { text: 'Tennis',        size: 20 },
-  { text: 'Track & Field', size: 20 },
-  { text: 'Football',      size: 20 },
+  { text: 'Tennis',        size: 22 },
+  { text: 'Track & Field', size: 19 },
+  { text: 'Football',      size: 22 },
   { text: 'Volleyball',    size: 20 },
   { text: 'Ice Hockey',    size: 20 },
-  { text: 'Golf',          size: 20 },
-  { text: 'Lacrosse',      size: 20 },
-  { text: 'Cross Country', size: 20 },
-  { text: 'Baseball',      size: 20 },
-  { text: 'Softball',      size: 20 },
-  { text: 'Gymnastics',    size: 20 },
-  { text: 'Rugby',         size: 20 },
-  { text: 'Wrestling',     size: 20 },
-  { text: 'Water Polo',    size: 20 },
-  { text: 'Skiing',        size: 20 },
-  { text: 'Fencing',       size: 20 },
-  { text: 'Diving',        size: 20 },
-  { text: 'Triathlon',     size: 20 },
+  { text: 'Golf',          size: 18 },
+  { text: 'Lacrosse',      size: 18 },
+  { text: 'Cross Country', size: 18 },
+  { text: 'Baseball',      size: 18 },
+  { text: 'Softball',      size: 17 },
+  { text: 'Gymnastics',    size: 17 },
+  { text: 'Rugby',         size: 17 },
+  { text: 'Wrestling',     size: 17 },
+  { text: 'Water Polo',    size: 17 },
+  { text: 'Skiing',        size: 17 },
+  { text: 'Fencing',       size: 17 },
+  { text: 'Diving',        size: 17 },
+  { text: 'Triathlon',     size: 17 },
 ];
 
 const countryWords = [
-  { text: 'United States',        size: 42 },
+  { text: 'United States',        size: 30 },  // scaled down — not the dominant signal
   { text: 'Australia',            size: 46 },
   { text: 'United Kingdom',       size: 36 },
   { text: 'Canada',               size: 40 },
@@ -44,14 +44,14 @@ const countryWords = [
 ];
 
 const outcomeWords = [
-  { text: 'Ivy League programs',          size: 36 },
-  { text: 'Power Four Division I',        size: 30 },
-  { text: 'Division II & III',            size: 27 },
+  { text: 'Academic excellence',          size: 36 },  // leading signal — broad, inclusive
+  { text: 'Power Four Division I',        size: 34 },
   { text: 'Scholarship placements',       size: 29 },
-  { text: 'Preferred walk-on offers',     size: 25 },
-  { text: 'All levels of collegiate sport', size: 22 },
-  { text: 'Academic excellence',          size: 26 },
-  { text: 'Program fit above prestige',   size: 21 },
+  { text: 'All levels of collegiate sport', size: 26 },
+  { text: 'Division II & III',            size: 27 },
+  { text: 'Preferred walk-on offers',     size: 24 },
+  { text: 'Program fit above prestige',   size: 22 },
+  { text: 'Ivy League programs',          size: 20 },  // present but not dominant
 ];
 
 type WordItem = { text: string; size: number };
@@ -323,24 +323,23 @@ export default function HomePage() {
             style={{
               position: 'absolute',
               left: '7vw',
-              top: '50%',
-              // Slightly above center
-              transform: 'translateY(-68%)',
+              top: '40%',
+              transform: 'translateY(-50%)',
               maxWidth: '300px',
               opacity: heroVisible ? 1 : 0,
               transition: 'opacity 1.2s cubic-bezier(0.16,1,0.3,1)',
             }}
           >
             <p style={{
-              fontFamily: 'var(--font-sans)',
-              fontWeight: 400,
-              fontStyle: 'normal',
-              fontSize: 'clamp(16px, 1.5vw, 19px)',
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 300,
+              fontStyle: 'italic',
+              fontSize: 'clamp(20px, 2vw, 26px)',
               color: 'var(--accent-ivory)',
               textAlign: 'left',
               margin: 0,
-              lineHeight: 1.6,
-              letterSpacing: '0.03em',
+              lineHeight: 1.5,
+              letterSpacing: '0.02em',
             }}>
               Structured pathways for student-athletes pursuing U.S. collegiate programs.
             </p>
