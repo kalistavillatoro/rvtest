@@ -3,21 +3,20 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-// ─── Sports: Rowing featured large; others scaled for editorial rhythm ───────
 const sportsWords = [
-  { text: 'Rowing',        size: 38 },  // flagship — prominently bigger
-  { text: 'Swimming',      size: 24 },
-  { text: 'Soccer',        size: 26 },
-  { text: 'Running',       size: 22 },
-  { text: 'Basketball',    size: 22 },
-  { text: 'Field Hockey',  size: 20 },
-  { text: 'Tennis',        size: 22 },
-  { text: 'Track & Field', size: 19 },
-  { text: 'Football',      size: 22 },
-  { text: 'Volleyball',    size: 20 },
+  { text: 'Soccer',        size: 36 },
+  { text: 'Basketball',    size: 34 },
+  { text: 'Swimming',      size: 32 },
+  { text: 'Rowing',        size: 38 },
+  { text: 'Football',      size: 30 },
+  { text: 'Tennis',        size: 28 },
+  { text: 'Running',       size: 24 },
+  { text: 'Track & Field', size: 22 },
+  { text: 'Field Hockey',  size: 21 },
+  { text: 'Volleyball',    size: 21 },
   { text: 'Ice Hockey',    size: 20 },
+  { text: 'Lacrosse',      size: 19 },
   { text: 'Golf',          size: 18 },
-  { text: 'Lacrosse',      size: 18 },
   { text: 'Cross Country', size: 18 },
   { text: 'Baseball',      size: 18 },
   { text: 'Softball',      size: 17 },
@@ -44,14 +43,14 @@ const countryWords = [
 ];
 
 const outcomeWords = [
-  { text: 'Academic excellence',          size: 36 },  // leading signal — broad, inclusive
-  { text: 'Power Four Division I',        size: 34 },
+  { text: 'Academic excellence',          size: 36 },
+  { text: 'Ivy League programs',          size: 34 },
+  { text: 'Power Four Division I',        size: 32 },
   { text: 'Scholarship placements',       size: 29 },
   { text: 'All levels of collegiate sport', size: 26 },
-  { text: 'Division II & III',            size: 27 },
-  { text: 'Preferred walk-on offers',     size: 24 },
-  { text: 'Program fit above prestige',   size: 22 },
-  { text: 'Ivy League programs',          size: 20 },  // present but not dominant
+  { text: 'Division II & III',            size: 25 },
+  { text: 'Preferred walk-on offers',     size: 22 },
+  { text: 'Program fit above prestige',   size: 20 },
 ];
 
 type WordItem = { text: string; size: number };
@@ -325,21 +324,20 @@ export default function HomePage() {
               left: '7vw',
               top: '40%',
               transform: 'translateY(-50%)',
-              maxWidth: '300px',
+              maxWidth: '420px',
               opacity: heroVisible ? 1 : 0,
               transition: 'opacity 1.2s cubic-bezier(0.16,1,0.3,1)',
             }}
           >
             <p style={{
-              fontFamily: 'var(--font-serif)',
+              fontFamily: 'var(--font-mono)',
               fontWeight: 300,
-              fontStyle: 'italic',
-              fontSize: 'clamp(20px, 2vw, 26px)',
+              fontSize: 'clamp(13px, 1.4vw, 17px)',
               color: 'var(--accent-ivory)',
               textAlign: 'left',
               margin: 0,
-              lineHeight: 1.5,
-              letterSpacing: '0.02em',
+              lineHeight: 1.7,
+              letterSpacing: '0.06em',
             }}>
               Structured pathways for student-athletes pursuing U.S. collegiate programs.
             </p>
