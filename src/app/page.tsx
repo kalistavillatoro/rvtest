@@ -330,14 +330,14 @@ export default function HomePage() {
             }}
           >
             <p style={{
-              fontFamily: 'var(--font-mono)',
+              fontFamily: 'var(--font-serif)',
               fontWeight: 300,
-              fontSize: 'clamp(13px, 1.4vw, 17px)',
+              fontSize: 'clamp(22px, 2.2vw, 30px)',
               color: 'var(--accent-ivory)',
               textAlign: 'left',
               margin: 0,
-              lineHeight: 1.7,
-              letterSpacing: '0.06em',
+              lineHeight: 1.45,
+              letterSpacing: '0.01em',
             }}>
               Structured pathways for student-athletes pursuing U.S. collegiate programs.
             </p>
