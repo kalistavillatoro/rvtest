@@ -60,6 +60,7 @@ export default function Nav() {
           <Link
             key={item.label}
             href={item.href}
+            className="nav-link"
             style={{
               fontFamily: 'var(--font-sans)',
               fontSize: '13px',
