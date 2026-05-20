@@ -3,19 +3,32 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-// ─── word data ────────────────────────────────────────────────────────────────
-// Curated to ~8 per column so visual heights are roughly equal
-
+// ─── Sports: 24 NCAA sports at small uniform size — displayed in 2 sub-cols ──
 const sportsWords = [
-  { text: 'Rowing',       size: 48 },
-  { text: 'Swimming',     size: 40 },
-  { text: 'Soccer',       size: 44 },
-  { text: 'Basketball',   size: 34 },
-  { text: 'Tennis',       size: 38 },
-  { text: 'Football',     size: 36 },
-  { text: 'Lacrosse',     size: 32 },
-  { text: 'Golf',         size: 30 },
-  { text: 'Volleyball',   size: 34 },
+  { text: 'Rowing',        size: 20 },
+  { text: 'Swimming',      size: 20 },
+  { text: 'Soccer',        size: 20 },
+  { text: 'Running',       size: 20 },
+  { text: 'Basketball',    size: 20 },
+  { text: 'Field Hockey',  size: 20 },
+  { text: 'Tennis',        size: 20 },
+  { text: 'Track & Field', size: 20 },
+  { text: 'Football',      size: 20 },
+  { text: 'Volleyball',    size: 20 },
+  { text: 'Ice Hockey',    size: 20 },
+  { text: 'Golf',          size: 20 },
+  { text: 'Lacrosse',      size: 20 },
+  { text: 'Cross Country', size: 20 },
+  { text: 'Baseball',      size: 20 },
+  { text: 'Softball',      size: 20 },
+  { text: 'Gymnastics',    size: 20 },
+  { text: 'Rugby',         size: 20 },
+  { text: 'Wrestling',     size: 20 },
+  { text: 'Water Polo',    size: 20 },
+  { text: 'Skiing',        size: 20 },
+  { text: 'Fencing',       size: 20 },
+  { text: 'Diving',        size: 20 },
+  { text: 'Triathlon',     size: 20 },
 ];
 
 const countryWords = [
@@ -31,14 +44,14 @@ const countryWords = [
 ];
 
 const outcomeWords = [
-  { text: 'Ivy League programs',    size: 40 },
-  { text: 'Power Four Division I',  size: 34 },
-  { text: 'Division II & III',      size: 30 },
-  { text: 'Scholarship placements', size: 32 },
-  { text: 'Preferred walk-on offers', size: 28 },
-  { text: 'All levels of collegiate sport', size: 24 },
-  { text: 'Academic excellence',    size: 28 },
-  { text: 'Program fit above prestige', size: 22 },
+  { text: 'Ivy League programs',          size: 36 },
+  { text: 'Power Four Division I',        size: 30 },
+  { text: 'Division II & III',            size: 27 },
+  { text: 'Scholarship placements',       size: 29 },
+  { text: 'Preferred walk-on offers',     size: 25 },
+  { text: 'All levels of collegiate sport', size: 22 },
+  { text: 'Academic excellence',          size: 26 },
+  { text: 'Program fit above prestige',   size: 21 },
 ];
 
 type WordItem = { text: string; size: number };
@@ -144,28 +157,26 @@ function useFadeUp() {
   return ref;
 }
 
-// ─── homepage ─────────────────────────────────────────────────────────────────
+// ─── homepage ────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
-  // Hero scroll-driven transition
-  const heroSectionRef   = useRef<HTMLDivElement>(null);
-  const img2WrapperRef   = useRef<HTMLDivElement>(null);
-
-  // Animated type
-  const [highlighted, setHighlighted] = useState<HighlightedWord | null>(null);
-
-  // Fade-up sections
+  const heroSectionRef = useRef<HTMLDivElement>(null);
+  const img2WrapperRef = useRef<HTMLDivElement>(null);
+  const [highlighted,  setHighlighted]  = useState<HighlightedWord | null>(null);
+  const [heroVisible,  setHeroVisible]  = useState(false);
   const contextRef = useFadeUp();
   const ctaRef     = useFadeUp();
 
   // Hero text fade-in
-  const [heroVisible, setHeroVisible] = useState(false);
   useEffect(() => {
     const t = setTimeout(() => setHeroVisible(true), 900);
     return () => clearTimeout(t);
   }, []);
 
-  // ── scroll-driven image crossfade (rAF + smoothstep, no React re-renders) ──
+  // ── scroll-driven crossfade ───────────────────────────────────────────────
+  // Image 1 holds for the vast majority of scroll; image 2 fades in only
+  // in the final ~12% of the hero section scroll. rAF + smoothstep, no React
+  // re-renders — directly mutates the wrapper's opacity for 60fps.
   useEffect(() => {
     let raf: number;
     let current = 0;
@@ -180,7 +191,7 @@ export default function HomePage() {
     }
 
     function tick() {
-      current = lerp(current, target, 0.035);   // buttery lag
+      current = lerp(current, target, 0.04);
       if (img2WrapperRef.current) {
         img2WrapperRef.current.style.opacity = String(current);
       }
@@ -194,8 +205,10 @@ export default function HomePage() {
       const scrollable = section.offsetHeight - window.innerHeight;
       if (scrollable <= 0) return;
       const raw = Math.min(1, window.scrollY / scrollable);
-      // Delayed onset: no change until 45% scroll, full by 90%
-      const delayed = Math.max(0, (raw - 0.45) / 0.45);
+      // Image 1 holds until 83% scroll. Transition completes at 95%.
+      const onset    = 0.83;
+      const window_  = 0.12;
+      const delayed  = Math.max(0, (raw - onset) / window_);
       target = smoothstep(delayed);
     }
 
@@ -206,7 +219,7 @@ export default function HomePage() {
     };
   }, []);
 
-  // ── animated type cycle ───────────────────────────────────────────────────
+  // ── animated type cycle ──────────────────────────────────────────────────
   useEffect(() => {
     let cycleTimeout: ReturnType<typeof setTimeout>;
     let fadeInterval: ReturnType<typeof setInterval>;
@@ -244,13 +257,13 @@ export default function HomePage() {
     <>
       {/* ═══════════════════════════════════════════════════════════
           SECTION 1 — HERO  (300vh sticky scroll container)
+          Image 1 stays fully visible for most of the scroll;
+          Image 2 fades in only in the final ~12% of hero scroll.
       ════════════════════════════════════════════════════════════ */}
       <div ref={heroSectionRef} style={{ height: '300vh', position: 'relative' }}>
-        <div style={{
-          position: 'sticky', top: 0,
-          height: '100vh', overflow: 'hidden',
-        }}>
-          {/* Image 1 — base */}
+        <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
+
+          {/* ── Image 1 — base (stays visible until very end) ── */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/Rowing 2 - green.jpg"
@@ -260,18 +273,14 @@ export default function HomePage() {
               position: 'absolute', inset: 0,
               width: '100%', height: '100%',
               objectFit: 'cover', objectPosition: 'center 30%',
-              filter: 'brightness(0.90) contrast(1.06) saturate(0.92)',
+              filter: 'brightness(0.90) contrast(1.06)',
             }}
           />
 
-          {/* Image 2 — crossfade target (starts invisible) */}
+          {/* ── Image 2 — fades in at end of hero scroll ── */}
           <div
             ref={img2WrapperRef}
-            style={{
-              position: 'absolute', inset: 0,
-              opacity: 0,
-              willChange: 'opacity',
-            }}
+            style={{ position: 'absolute', inset: 0, opacity: 0, willChange: 'opacity' }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -281,55 +290,52 @@ export default function HomePage() {
               style={{
                 width: '100%', height: '100%',
                 objectFit: 'cover', objectPosition: 'center 30%',
-                filter: 'brightness(0.88) contrast(1.08) saturate(0.90)',
+                // No saturation reduction — keeps image sharp and vivid
+                filter: 'brightness(0.88) contrast(1.10)',
               }}
             />
           </div>
 
-          {/* Subtle gradient — bottom only, improves text contrast */}
+          {/* ── Bottom gradient for contrast ── */}
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'linear-gradient(to bottom, transparent 55%, rgba(14,16,15,0.45) 100%)',
+            background: 'linear-gradient(to bottom, transparent 55%, rgba(14,16,15,0.40) 100%)',
             pointerEvents: 'none',
           }} />
 
-          {/* Film grain overlay */}
-          <div style={{
-            position: 'absolute', inset: 0,
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-            opacity: 0.032,
-            mixBlendMode: 'overlay',
-            pointerEvents: 'none',
-          }} />
-
-          {/* Hero text — left-aligned, single subtitle only */}
+          {/* ── Hero text ──────────────────────────────────────────
+              Title removed. Single left-aligned subtitle only.
+              Font: DM Sans 400 — strong, confident, institutional.
+              Width kept narrow so the oars remain fully visible.
+          ─────────────────────────────────────────────────────── */}
           <div
             className="hero-text-block"
             style={{
               position: 'absolute',
               left: '7vw',
               top: '50%',
-              transform: 'translateY(-58%)',
-              maxWidth: '460px',
+              // Slightly above center
+              transform: 'translateY(-68%)',
+              maxWidth: '300px',
               opacity: heroVisible ? 1 : 0,
               transition: 'opacity 1.2s cubic-bezier(0.16,1,0.3,1)',
             }}
           >
             <p style={{
-              fontFamily: 'var(--font-serif)',
-              fontWeight: 300,
-              fontStyle: 'italic',
-              fontSize: 'clamp(18px, 1.7vw, 22px)',
-              color: '#D4CFC6',
+              fontFamily: 'var(--font-sans)',
+              fontWeight: 400,
+              fontStyle: 'normal',
+              fontSize: 'clamp(16px, 1.5vw, 19px)',
+              color: 'var(--accent-ivory)',
               textAlign: 'left',
               margin: 0,
-              lineHeight: 1.55,
-              letterSpacing: '0.025em',
+              lineHeight: 1.6,
+              letterSpacing: '0.03em',
             }}>
-              Structured pathways for student-athletes<br />
-              pursuing U.S. collegiate programs.
+              Structured pathways for student-athletes pursuing U.S. collegiate programs.
             </p>
           </div>
+
         </div>
       </div>
 
@@ -371,7 +377,10 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════
-          SECTION 3 — ANIMATED TYPOGRAPHY  (3 balanced columns)
+          SECTION 3 — ANIMATED TYPOGRAPHY
+          Sports: 24 NCAA sports in 2 sub-columns (same total width
+          as one column), so everyone sees their sport. Smaller text
+          to fit; approximately same visual height as other columns.
       ════════════════════════════════════════════════════════════ */}
       <section style={{ backgroundColor: 'var(--bg-primary)', padding: '140px 5vw 120px' }}>
         <div style={{
@@ -383,26 +392,42 @@ export default function HomePage() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '32px', alignItems: 'start' }}>
-          {/* Block 1 — Sports */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', paddingTop: 0 }}>
-            {sportsWords.map((w, i) => (
-              <AnimatedWord key={w.text} word={w} block={0} index={i} highlighted={highlighted} align="left" />
-            ))}
+
+          {/* Block 1 — Sports (2 sub-columns inside 1 column) */}
+          <div>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              columnGap: '16px',
+              rowGap: '3px',
+            }}>
+              {sportsWords.map((w, i) => (
+                <AnimatedWord
+                  key={w.text}
+                  word={w}
+                  block={0}
+                  index={i}
+                  highlighted={highlighted}
+                  align="left"
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Block 2 — Countries (offset down slightly) */}
+          {/* Block 2 — Countries */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', paddingTop: '24px' }}>
             {countryWords.map((w, i) => (
               <AnimatedWord key={w.text} word={w} block={1} index={i} highlighted={highlighted} align="center" />
             ))}
           </div>
 
-          {/* Block 3 — Outcomes (offset down more, larger sizes to balance height) */}
+          {/* Block 3 — Outcomes */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', paddingTop: '8px' }}>
             {outcomeWords.map((w, i) => (
               <AnimatedWord key={w.text} word={w} block={2} index={i} highlighted={highlighted} align="right" />
             ))}
           </div>
+
         </div>
       </section>
 
@@ -441,4 +466,3 @@ export default function HomePage() {
     </>
   );
 }
-

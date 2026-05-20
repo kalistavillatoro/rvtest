@@ -274,11 +274,11 @@ export default function ApplyPage() {
               <FocusInput name="sport" required />
             </FormField>
 
-            <FormField label="Graduation year">
+            <FormField label="High school graduation year">
               <FocusSelect
                 name="graduation_year"
                 required
-                options={['2025', '2026', '2027', '2028', '2029', '2030', 'Post-grad']}
+                options={['2026', '2027', '2028', '2029', '2030', '2031', '2032', 'Post-grad']}
               />
             </FormField>
 
