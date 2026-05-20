@@ -132,7 +132,7 @@ export default function ApplyPage() {
     const data = new FormData(form);
 
     try {
-      const res = await fetch('https://formspree.io/f/xyzwpwgr', {
+      const res = await fetch('https://formspree.io/f/xnjrjwvn', {
         method: 'POST',
         body: data,
         headers: { Accept: 'application/json' },
