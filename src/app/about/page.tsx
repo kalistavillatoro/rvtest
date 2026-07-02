@@ -4,29 +4,21 @@ import { useEffect, useRef } from 'react';
 
 function useFadeUp() {
   const ref = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    const fadeEls = el.querySelectorAll('.fade-up');
-    fadeEls.forEach((el) => observer.observe(el));
-
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.getAttribute('data-delay') || '0');
+          setTimeout(() => entry.target.classList.add('visible'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    el.querySelectorAll('.fade-up, .divider-animated').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
-
   return ref;
 }
 
@@ -34,190 +26,150 @@ export default function AboutPage() {
   const pageRef = useFadeUp();
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', paddingTop: '120px', paddingBottom: '120px' }}>
+    <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', paddingTop: 'clamp(80px, 15vw, 120px)', paddingBottom: 'clamp(80px, 12vw, 140px)' }}>
       <div ref={pageRef} style={{ maxWidth: '680px', margin: '0 auto', padding: '0 24px' }}>
 
-        {/* Section A */}
-        <div style={{ marginBottom: '80px' }}>
-          <div className="fade-up" style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.14em',
-            color: 'var(--accent-forest)',
-            marginBottom: '24px',
+        {/* Header */}
+        <div style={{ marginBottom: '72px' }}>
+          <div className="fade-up" data-delay="0" style={{
+            fontFamily: 'var(--font-mono)', fontSize: '11px',
+            textTransform: 'uppercase', letterSpacing: '0.14em',
+            color: 'var(--accent-forest)', marginBottom: '24px',
           }}>
             About
           </div>
-          <h1 className="fade-up" style={{
-            fontFamily: 'var(--font-serif)',
-            fontWeight: 300,
-            fontSize: '64px',
-            color: 'var(--text-primary)',
-            lineHeight: 1.05,
-            marginBottom: '40px',
+          <h1 className="fade-up heading-interactive" data-delay="80" style={{
+            fontFamily: 'var(--font-serif)', fontWeight: 300,
+            fontSize: 'clamp(42px, 6vw, 64px)',
+            color: 'var(--text-primary)', lineHeight: 1.05, marginBottom: '40px',
           }}>
-            Built from the inside.
+            Built from experience.
           </h1>
-          <div className="fade-up" style={{ borderTop: '1px solid var(--border)' }} />
+          <div className="divider-animated" data-delay="180" />
         </div>
 
-        {/* Section B */}
-        <div className="fade-up" style={{ marginBottom: '80px' }}>
-          <p style={{
-            fontFamily: 'var(--font-sans)',
-            fontWeight: 300,
-            fontSize: '17px',
-            lineHeight: 1.85,
-            color: 'var(--text-secondary)',
-            marginBottom: '28px',
+        {/* Origin */}
+        <div style={{ marginBottom: '80px' }}>
+          <p className="fade-up" data-delay="0" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 300,
+            fontSize: '17px', lineHeight: 1.85,
+            color: 'var(--text-secondary)', marginBottom: '28px',
           }}>
-            Recruiting Victory was founded by a Division I athlete who was herself recruited internationally to compete at the Ivy League level. That experience — navigating a system with no roadmap, across borders, across sports, across admission standards that required simultaneous academic and athletic precision — became the foundation of what this platform offers.
+            Recruiting Victory was built by a Division I athlete who was recruited by five universities — including programs within the Ivy League. That process, navigated across time zones, timelines, and competing academic and athletic expectations, was never as clear as it should have been.
           </p>
-          <p style={{
-            fontFamily: 'var(--font-sans)',
-            fontWeight: 300,
-            fontSize: '17px',
-            lineHeight: 1.85,
-            color: 'var(--text-secondary)',
-            marginBottom: '28px',
+          <p className="fade-up" data-delay="100" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 300,
+            fontSize: '17px', lineHeight: 1.85,
+            color: 'var(--text-secondary)', marginBottom: '28px',
           }}>
-            After six years of working directly with student-athletes and alongside high schools to understand where the process breaks down, a clear pattern emerged: the athletes who struggled were rarely under-qualified. They were under-prepared for a system that rewards structure, timing, and positioning over raw talent alone.
+            What became clear over time was that the athletes who struggled most weren&apos;t struggling because of ability. They were struggling because they didn&apos;t have a system. No clear profile. No organized outreach. No step-by-step plan.
           </p>
-          <p style={{
-            fontFamily: 'var(--font-sans)',
-            fontWeight: 300,
-            fontSize: '17px',
-            lineHeight: 1.85,
+          <p className="fade-up" data-delay="180" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 300,
+            fontSize: '17px', lineHeight: 1.85,
             color: 'var(--text-secondary)',
           }}>
-            Recruiting Victory exists to correct that.
+            The Recruiting Victory System was built to solve exactly that — to give student-athletes the structure, organization, and guidance they need to move through recruiting with clarity and confidence.
           </p>
         </div>
 
-        {/* Section C — Institutional Foundation */}
-        <div className="fade-up" style={{ marginBottom: '80px' }}>
-          <div style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.14em',
-            color: 'var(--accent-forest)',
-            marginBottom: '20px',
+        {/* CAPS */}
+        <div className="divider-animated" data-delay="0" style={{ marginBottom: '56px' }} />
+        <div style={{ marginBottom: '80px' }}>
+          <div className="fade-up" data-delay="60" style={{
+            fontFamily: 'var(--font-mono)', fontSize: '11px',
+            textTransform: 'uppercase', letterSpacing: '0.14em',
+            color: 'var(--accent-forest)', marginBottom: '20px',
           }}>
-            Institutional Foundation
+            Institutional foundation
           </div>
-          <p style={{
-            fontFamily: 'var(--font-sans)',
-            fontWeight: 300,
-            fontSize: '16px',
-            lineHeight: 1.85,
-            color: 'var(--text-muted)',
-            marginBottom: '20px',
+          <p className="fade-up" data-delay="140" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 300,
+            fontSize: '16px', lineHeight: 1.85,
+            color: 'var(--text-muted)', marginBottom: '20px',
           }}>
-            Recruiting Victory operates in partnership with CAPS Global — the College Athlete Placement Standard — a certification and training program for high schools worldwide. Schools partner with CAPS to build and formalize their own athletic recruiting infrastructure. Recruiting Victory serves individual athletes and families navigating that same landscape from the student side. Together, they represent a complete ecosystem: institutional systems for schools, and individual advisory for athletes.
+            Recruiting Victory operates alongside CAPS (College Athlete Placement Standard) — an institutional framework designed to help high schools formalize and strengthen their athletic recruiting infrastructure.
           </p>
-          <a
-            href="https://www.capsglobal.org"
-            target="_blank"
-            rel="noopener noreferrer"
+          <p className="fade-up" data-delay="200" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 300,
+            fontSize: '16px', lineHeight: 1.85,
+            color: 'var(--text-muted)', marginBottom: '20px',
+          }}>
+            While CAPS works at the school and systems level, Recruiting Victory works directly with student-athletes and families — giving individuals the same structure that the best-prepared programs already have in place.
+          </p>
+          <a className="fade-up" data-delay="260"
+            href="https://www.capsglobal.org" target="_blank" rel="noopener noreferrer"
             style={{
-              fontFamily: 'var(--font-sans)',
-              fontWeight: 300,
-              fontSize: '16px',
-              color: 'var(--accent-sage)',
-              textDecoration: 'none',
+              fontFamily: 'var(--font-sans)', fontWeight: 300,
+              fontSize: '15px', color: 'var(--accent-sage)',
+              display: 'inline-block', transition: 'opacity 0.25s ease',
             }}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.7'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
           >
-            Learn about CAPS Global →
+            Learn about CAPS →
           </a>
         </div>
 
-        {/* Section D — Experience Across */}
-        <div className="fade-up" style={{ marginBottom: '80px' }}>
-          <div style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.14em',
-            color: 'var(--accent-forest)',
-            marginBottom: '20px',
+        {/* Yale */}
+        <div className="divider-animated" data-delay="0" style={{ marginBottom: '56px' }} />
+        <div style={{ marginBottom: '80px' }}>
+          <div className="fade-up" data-delay="60" style={{
+            fontFamily: 'var(--font-mono)', fontSize: '11px',
+            textTransform: 'uppercase', letterSpacing: '0.14em',
+            color: 'var(--accent-forest)', marginBottom: '20px',
           }}>
-            Experience Across
+            Development
           </div>
-          <p style={{
-            fontFamily: 'var(--font-sans)',
-            fontWeight: 300,
-            fontSize: '15px',
-            lineHeight: 1.8,
-            color: 'var(--text-secondary)',
-            marginBottom: '12px',
+          <p className="fade-up" data-delay="140" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 300,
+            fontSize: '16px', lineHeight: 1.85,
+            color: 'var(--text-muted)',
           }}>
-            Sports: Rowing · Athletics · Swimming · Tennis · Golf · Volleyball · and others
-          </p>
-          <p style={{
-            fontFamily: 'var(--font-sans)',
-            fontWeight: 300,
-            fontSize: '15px',
-            lineHeight: 1.8,
-            color: 'var(--text-secondary)',
-          }}>
-            Regions: Australia · Singapore · UAE · United Kingdom · Canada · New Zealand · Hong Kong
+            The system was developed with support from Yale Tsai City Innovation — a program focused on building tools and solutions to real, clearly-defined problems. Recruiting Victory began there as an answer to a straightforward question: why don&apos;t student-athletes have a simple, organized system for this?
           </p>
         </div>
 
-        {/* Section E — Student Outcomes */}
-        <div className="fade-up">
-          <div style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.14em',
-            color: 'var(--accent-forest)',
-            marginBottom: '20px',
+        {/* Track record */}
+        <div className="divider-animated" data-delay="0" style={{ marginBottom: '56px' }} />
+        <div>
+          <div className="fade-up" data-delay="60" style={{
+            fontFamily: 'var(--font-mono)', fontSize: '11px',
+            textTransform: 'uppercase', letterSpacing: '0.14em',
+            color: 'var(--accent-forest)', marginBottom: '20px',
           }}>
-            Student Outcomes
+            Track record
           </div>
-          <p style={{
-            fontFamily: 'var(--font-sans)',
-            fontWeight: 300,
-            fontSize: '15px',
-            lineHeight: 1.8,
-            color: 'var(--text-muted)',
-            marginBottom: '24px',
+          <p className="fade-up" data-delay="120" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 300,
+            fontSize: '15px', lineHeight: 1.8,
+            color: 'var(--text-muted)', marginBottom: '24px',
           }}>
-            Athletes who have moved through this process have gone on to engage with programs across:
+            Athletes supported through this process have gone on to compete at programs across all levels of collegiate sport, including:
           </p>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '16px',
-            marginBottom: '32px',
+          <div className="fade-up outcomes-grid" data-delay="180" style={{
+            display: 'grid', gridTemplateColumns: '1fr 1fr',
+            gap: '16px', marginBottom: '32px',
           }}>
             {[
-              'Ivy League programs (Yale, Princeton, Columbia, Dartmouth, Brown)',
-              'Power Four Division I programs (Stanford, Duke, Michigan, Northwestern)',
-              'Division II & III programs across all regions',
-              'Scholarship and preferred walk-on offers',
+              'Ivy League institutions including Yale, Princeton, Columbia, Dartmouth, and Brown',
+              'Power Four Division I programs including Stanford, Duke, Michigan, and Northwestern',
+              'Division II and III programs across multiple regions and sports',
+              'Scholarship placements and preferred walk-on offers',
             ].map((item) => (
               <div key={item} style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '13px',
-                color: 'var(--text-ghost)',
-                lineHeight: 1.6,
+                fontFamily: 'var(--font-mono)', fontSize: '12px',
+                color: 'var(--text-ghost)', lineHeight: 1.6,
               }}>
                 {item}
               </div>
             ))}
           </div>
-          <p style={{
-            fontFamily: 'var(--font-sans)',
-            fontWeight: 300,
-            fontSize: '13px',
-            lineHeight: 1.7,
-            color: 'var(--text-ghost)',
+          <p className="fade-up" data-delay="260" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 300,
+            fontSize: '13px', lineHeight: 1.7, color: 'var(--text-ghost)',
           }}>
-            These outcomes are presented as context, not as a guarantee or measure of success. Every athlete&apos;s path is individual.
+            These outcomes are context, not a guarantee. Every athlete&apos;s situation, sport, and goals are different.
           </p>
         </div>
 
