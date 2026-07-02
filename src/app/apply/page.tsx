@@ -229,7 +229,7 @@ export default function ApplyPage() {
             lineHeight: 1.1,
             marginBottom: '28px',
           }}>
-            Begin here.
+            Apply for access.
           </h1>
           <p style={{
             fontFamily: 'var(--font-sans)',
@@ -240,7 +240,7 @@ export default function ApplyPage() {
             maxWidth: '320px',
             marginBottom: '40px',
           }}>
-            This short application allows us to understand your situation before we reach out. There is no purchase involved at this stage. Every submission is reviewed personally. We respond within 3–5 business days with a recommended next step.
+            Tell us a little about your situation. Applications are reviewed individually — there&apos;s no purchase at this stage. If accepted, you&apos;ll receive access to the full Recruiting Victory System.
           </p>
           <div style={{
             fontFamily: 'var(--font-mono)',

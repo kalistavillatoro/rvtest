@@ -23,9 +23,7 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHome]);
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
@@ -33,8 +31,8 @@ export default function Nav() {
   }, [menuOpen]);
 
   const navLinks = [
-    { label: 'Framework', href: '/about' },
-    { label: 'Support Model', href: '/offerings' },
+    { label: 'About', href: '/about' },
+    { label: 'The System', href: '/offerings' },
     { label: 'Apply', href: '/apply' },
   ];
 

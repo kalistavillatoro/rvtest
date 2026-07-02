@@ -3,118 +3,27 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-const sportsWords = [
-  { text: 'Soccer',        size: 36 },
-  { text: 'Basketball',    size: 34 },
-  { text: 'Swimming',      size: 32 },
-  { text: 'Rowing',        size: 38 },
-  { text: 'Football',      size: 30 },
-  { text: 'Tennis',        size: 28 },
-  { text: 'Running',       size: 24 },
-  { text: 'Track & Field', size: 22 },
-  { text: 'Field Hockey',  size: 21 },
-  { text: 'Volleyball',    size: 21 },
-  { text: 'Ice Hockey',    size: 20 },
-  { text: 'Lacrosse',      size: 19 },
-  { text: 'Golf',          size: 18 },
-  { text: 'Cross Country', size: 18 },
-  { text: 'Baseball',      size: 18 },
-  { text: 'Softball',      size: 17 },
-  { text: 'Gymnastics',    size: 17 },
-  { text: 'Rugby',         size: 17 },
-  { text: 'Wrestling',     size: 17 },
-  { text: 'Water Polo',    size: 17 },
-  { text: 'Skiing',        size: 17 },
-  { text: 'Fencing',       size: 17 },
-  { text: 'Diving',        size: 17 },
-  { text: 'Triathlon',     size: 17 },
-];
-
-const countryWords = [
-  { text: 'United States',        size: 30 },  // scaled down — not the dominant signal
-  { text: 'Australia',            size: 46 },
-  { text: 'United Kingdom',       size: 36 },
-  { text: 'Canada',               size: 40 },
-  { text: 'Singapore',            size: 34 },
-  { text: 'United Arab Emirates', size: 28 },
-  { text: 'Mexico',               size: 38 },
-  { text: 'New Zealand',          size: 32 },
-  { text: 'Hong Kong',            size: 34 },
-];
-
-const outcomeWords = [
-  { text: 'Academic excellence',          size: 36 },
-  { text: 'Ivy League programs',          size: 34 },
-  { text: 'Power Four Division I',        size: 32 },
-  { text: 'Scholarship placements',       size: 29 },
-  { text: 'All levels of collegiate sport', size: 26 },
-  { text: 'Division II & III',            size: 25 },
-  { text: 'Preferred walk-on offers',     size: 22 },
-  { text: 'Program fit above prestige',   size: 20 },
-];
-
-type WordItem = { text: string; size: number };
-
-function buildWordList() {
-  const all: { text: string; block: number; index: number }[] = [];
-  sportsWords.forEach((w, i)  => all.push({ text: w.text, block: 0, index: i }));
-  countryWords.forEach((w, i) => all.push({ text: w.text, block: 1, index: i }));
-  outcomeWords.forEach((w, i) => all.push({ text: w.text, block: 2, index: i }));
-  return all;
-}
-const allWords = buildWordList();
-
-interface HighlightedWord { block: number; index: number; opacity: number; }
-
-function AnimatedWord({
-  word, block, index, highlighted, align,
-}: {
-  word: WordItem; block: number; index: number;
-  highlighted: HighlightedWord | null; align: 'left' | 'center' | 'right';
-}) {
-  const [hovered, setHovered] = useState(false);
-  const isHighlighted = highlighted?.block === block && highlighted?.index === index;
-
-  let color = 'var(--text-ghost)';
-  let fontWeight: number = 300;
-  let textDecoration = 'none';
-  let textDecorationColor = 'transparent';
-
-  if (hovered) {
-    color = 'var(--text-primary)';
-    fontWeight = 600;
-    textDecoration = 'underline';
-    textDecorationColor = 'var(--accent-forest)';
-  } else if (isHighlighted && highlighted) {
-    const r = 143, g = 175, b = 151;
-    color = `rgba(${r}, ${g}, ${b}, ${highlighted.opacity})`;
-    fontWeight = highlighted.opacity > 0.5 ? 600 : 300;
-  }
-
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        fontFamily: 'var(--font-serif)',
-        fontSize: `${word.size}px`,
-        fontWeight,
-        color,
-        textAlign: align,
-        lineHeight: 1.15,
-        cursor: 'default',
-        textDecoration,
-        textDecorationColor,
-        transition: hovered ? 'none' : 'color 1.2s ease',
-        userSelect: 'none',
-      }}
-    >
-      {word.text}
-    </div>
-  );
+function useFadeUp() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.getAttribute('data-delay') || '0');
+          setTimeout(() => entry.target.classList.add('visible'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    el.querySelectorAll('.fade-up, .divider-animated').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+  return ref;
 }
 
-function CTAButton() {
+function ApplyButton({ label = 'Apply for Access' }: { label?: string }) {
   const [hovered, setHovered] = useState(false);
   return (
     <button
@@ -131,52 +40,80 @@ function CTAButton() {
         cursor: 'pointer', transition: 'all 0.3s ease', borderRadius: 0,
       }}
     >
-      Submit an Application
+      {label}
     </button>
   );
 }
 
-function useFadeUp() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const delay = parseInt(entry.target.getAttribute('data-delay') || '0');
-          setTimeout(() => entry.target.classList.add('visible'), delay);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    el.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
+const parts = [
+  {
+    num: '01',
+    name: 'My Profile',
+    desc: 'A guided spreadsheet where you build your complete recruiting profile — stats, academics, video links, and key information organized the way college coaches need to see it.',
+    outcome: 'Build a profile colleges can understand.',
+  },
+  {
+    num: '02',
+    name: 'My Colleges',
+    desc: 'A tracking system for your college list and coach outreach. Organized by school, with built-in templates and follow-up guidance so nothing falls through the cracks.',
+    outcome: 'Stay consistent with outreach and follow-ups.',
+  },
+  {
+    num: '03',
+    name: 'The Course',
+    desc: 'A step-by-step guide that walks you through the full recruiting process from start to finish — what to do, when to do it, and why it matters.',
+    outcome: 'Always know exactly what to do next.',
+  },
+];
 
-// ─── homepage ────────────────────────────────────────────────────────────────
+const steps = [
+  {
+    step: '1',
+    title: 'Build your profile.',
+    body: 'Enter your information once. My Profile becomes your recruiting foundation — complete, organized, and ready to share with any coach at any school.',
+  },
+  {
+    step: '2',
+    title: 'Organize your colleges.',
+    body: 'Build your target list. Track outreach. Use built-in templates to contact coaches and stay on top of every conversation as it develops.',
+  },
+  {
+    step: '3',
+    title: 'Follow the system.',
+    body: 'The Course walks you through every stage of recruiting — what to do, what to send, and what comes next. The profile and tracker support each step.',
+  },
+];
+
+const screenshots = [
+  {
+    label: 'My Profile',
+    caption: 'All your recruiting information — organized, complete, and ready to share with coaches.',
+    placeholder: '[INSERT NOTION PROFILE DASHBOARD IMAGE]',
+  },
+  {
+    label: 'My Colleges',
+    caption: 'Your outreach tracker with built-in templates and follow-up guidance.',
+    placeholder: '[INSERT COLLEGE TRACKER CRM IMAGE]',
+  },
+  {
+    label: 'The Course',
+    caption: 'A structured guide that walks you through every stage of the recruiting process.',
+    placeholder: '[INSERT COURSE / GUIDANCE STRUCTURE IMAGE]',
+  },
+];
 
 export default function HomePage() {
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const img1Ref        = useRef<HTMLImageElement>(null);
   const img2WrapperRef = useRef<HTMLDivElement>(null);
-  const [highlighted,  setHighlighted]  = useState<HighlightedWord | null>(null);
-  const [heroVisible,  setHeroVisible]  = useState(false);
-  const contextRef = useFadeUp();
-  const ctaRef     = useFadeUp();
+  const [heroVisible,  setHeroVisible] = useState(false);
+  const contentRef = useFadeUp();
 
-  // Hero text fade-in
   useEffect(() => {
     const t = setTimeout(() => setHeroVisible(true), 900);
     return () => clearTimeout(t);
   }, []);
 
-  // ── scroll-driven crossfade ───────────────────────────────────────────────
-  // Image 1 holds for the vast majority of scroll; image 2 fades in only
-  // in the final ~12% of the hero section scroll. rAF + smoothstep, no React
-  // re-renders — directly mutates the wrapper's opacity for 60fps.
   useEffect(() => {
     let raf: number;
     let current = 0;
@@ -206,13 +143,10 @@ export default function HomePage() {
       if (scrollable <= 0) return;
       const raw = Math.min(1, window.scrollY / scrollable);
 
-      // Subtle zoom on image 1 as you scroll (1.0 → 1.03) — gives
-      // immediate visual feedback that scroll is doing something.
       if (img1Ref.current) {
         img1Ref.current.style.transform = `scale(${1 + raw * 0.03})`;
       }
 
-      // Image 2 fades in only in the final 15% of hero scroll.
       const onset   = 0.85;
       const window_ = 0.15;
       target = smoothstep(Math.max(0, (raw - onset) / window_));
@@ -225,51 +159,13 @@ export default function HomePage() {
     };
   }, []);
 
-  // ── animated type cycle ──────────────────────────────────────────────────
-  useEffect(() => {
-    let cycleTimeout: ReturnType<typeof setTimeout>;
-    let fadeInterval: ReturnType<typeof setInterval>;
-
-    function pickAndHighlight() {
-      const idx  = Math.floor(Math.random() * allWords.length);
-      const word = allWords[idx];
-      setHighlighted({ block: word.block, index: word.index, opacity: 1 });
-
-      fadeInterval = setInterval(() => {
-        setHighlighted((prev) => {
-          if (!prev) return null;
-          const next = prev.opacity - 0.06;
-          if (next <= 0) { clearInterval(fadeInterval); return null; }
-          return { ...prev, opacity: next };
-        });
-      }, 40);
-
-      cycleTimeout = setTimeout(() => {
-        clearInterval(fadeInterval);
-        setHighlighted(null);
-        cycleTimeout = setTimeout(pickAndHighlight, 150);
-      }, 1500);
-    }
-
-    const start = setTimeout(pickAndHighlight, 600);
-    return () => {
-      clearTimeout(start);
-      clearTimeout(cycleTimeout);
-      clearInterval(fadeInterval);
-    };
-  }, []);
-
   return (
     <>
-      {/* ═══════════════════════════════════════════════════════════
-          SECTION 1 — HERO  (200vh sticky scroll container)
-          Scrolling immediately produces a subtle zoom on image 1.
-          Image 2 fades in only in the final 15% of hero scroll.
-      ════════════════════════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          HERO — scroll-driven crossfade
+      ══════════════════════════════════════════ */}
       <div ref={heroSectionRef} style={{ height: '200vh', position: 'relative' }}>
         <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
-
-          {/* ── Image 1 — base; subtle scroll-driven zoom via ref ── */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             ref={img1Ref}
@@ -285,8 +181,6 @@ export default function HomePage() {
               willChange: 'transform',
             }}
           />
-
-          {/* ── Image 2 — fades in at end of hero scroll ── */}
           <div
             ref={img2WrapperRef}
             style={{ position: 'absolute', inset: 0, opacity: 0, willChange: 'opacity' }}
@@ -299,24 +193,15 @@ export default function HomePage() {
               style={{
                 width: '100%', height: '100%',
                 objectFit: 'cover', objectPosition: 'center 30%',
-                // No saturation reduction — keeps image sharp and vivid
                 filter: 'brightness(0.88) contrast(1.10)',
               }}
             />
           </div>
-
-          {/* ── Bottom gradient for contrast ── */}
           <div style={{
             position: 'absolute', inset: 0,
             background: 'linear-gradient(to bottom, transparent 55%, rgba(14,16,15,0.40) 100%)',
             pointerEvents: 'none',
           }} />
-
-          {/* ── Hero text ──────────────────────────────────────────
-              Title removed. Single left-aligned subtitle only.
-              Font: DM Sans 400 — strong, confident, institutional.
-              Width kept narrow so the oars remain fully visible.
-          ─────────────────────────────────────────────────────── */}
           <div
             className="hero-text-block"
             style={{
@@ -339,137 +224,316 @@ export default function HomePage() {
               lineHeight: 1.45,
               letterSpacing: '0.01em',
             }}>
-              Structured pathways for student-athletes pursuing U.S. collegiate programs.
+              A 3-part recruiting system for student-athletes.
             </p>
           </div>
-
         </div>
       </div>
 
-      {/* ═══════════════════════════════════════════════════════════
-          SECTION 2 — CONTEXT PARAGRAPH
-      ════════════════════════════════════════════════════════════ */}
-      <section style={{ backgroundColor: 'var(--bg-primary)', padding: 'clamp(72px, 10vw, 120px) 24px' }}>
-        <div ref={contextRef} style={{ maxWidth: '640px', margin: '0 auto' }}>
-          <div className="fade-up" data-delay="0" style={{
-            fontFamily: 'var(--font-mono)', fontSize: '11px',
-            textTransform: 'uppercase', letterSpacing: '0.14em',
-            color: 'var(--accent-forest)', marginBottom: '32px',
-          }}>
-            The Landscape
-          </div>
-          <p className="fade-up" data-delay="100" style={{
-            fontFamily: 'var(--font-sans)', fontWeight: 300,
-            fontSize: '18px', lineHeight: 1.8,
-            color: 'var(--text-secondary)', marginBottom: '28px',
-          }}>
-            Most families enter the U.S. college athletic recruiting process without a clear sense of when it begins, who drives it, or how institutions evaluate candidates beyond performance alone. The result is a fragmented, reactive experience that disadvantages high-performing athletes — not for lack of ability, but for lack of structure.
-          </p>
-          <p className="fade-up" data-delay="200" style={{
-            fontFamily: 'var(--font-sans)', fontWeight: 300,
-            fontSize: '18px', lineHeight: 1.8,
-            color: 'var(--text-secondary)', marginBottom: '64px',
-          }}>
-            Recruiting Victory provides that structure: a disciplined, individually calibrated framework that helps student-athletes at every stage move through the recruiting process with clarity, confidence, and a competitive position that reflects the full scope of who they are.
-          </p>
-          <div className="fade-up" data-delay="300" style={{
-            borderTop: '1px solid var(--border)', paddingTop: '32px',
-            textAlign: 'center', fontFamily: 'var(--font-mono)',
-            fontSize: '11px', textTransform: 'uppercase',
-            letterSpacing: '0.12em', color: 'var(--text-muted)',
-          }}>
-            Powered by CAPS (College Athlete Placement Standard) · The Institutional Standard for High School Athletic Recruiting Systems
-          </div>
-        </div>
-      </section>
+      {/* ══════════════════════════════════════════
+          BELOW-HERO CONTENT
+      ══════════════════════════════════════════ */}
+      <div ref={contentRef}>
 
-      {/* ═══════════════════════════════════════════════════════════
-          SECTION 3 — ANIMATED TYPOGRAPHY
-          Sports: 24 NCAA sports in 2 sub-columns (same total width
-          as one column), so everyone sees their sport. Smaller text
-          to fit; approximately same visual height as other columns.
-      ════════════════════════════════════════════════════════════ */}
-      <section style={{ backgroundColor: 'var(--bg-primary)', padding: 'clamp(72px, 10vw, 140px) 5vw clamp(60px, 8vw, 120px)' }}>
-        <div style={{
-          fontFamily: 'var(--font-mono)', fontSize: '11px',
-          textTransform: 'uppercase', letterSpacing: '0.14em',
-          color: 'var(--accent-forest)', marginBottom: '72px',
-        }}>
-          Reach · Sport · Outcome
-        </div>
-
-        <div className="anim-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '32px', alignItems: 'start' }}>
-
-          {/* Block 1 — Sports (2 sub-columns inside 1 column) */}
-          <div>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              columnGap: '16px',
-              rowGap: '3px',
+        {/* ── SECTION 1: THE PROBLEM ── */}
+        <section style={{ backgroundColor: 'var(--bg-primary)', padding: 'clamp(72px, 10vw, 120px) 24px' }}>
+          <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+            <div className="fade-up" data-delay="0" style={{
+              fontFamily: 'var(--font-mono)', fontSize: '11px',
+              textTransform: 'uppercase', letterSpacing: '0.14em',
+              color: 'var(--accent-forest)', marginBottom: '32px',
             }}>
-              {sportsWords.map((w, i) => (
-                <AnimatedWord
-                  key={w.text}
-                  word={w}
-                  block={0}
-                  index={i}
-                  highlighted={highlighted}
-                  align="left"
-                />
+              The Recruiting Victory System
+            </div>
+            <h2 className="fade-up" data-delay="80" style={{
+              fontFamily: 'var(--font-serif)', fontWeight: 300,
+              fontSize: 'clamp(32px, 4vw, 52px)',
+              color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '32px',
+            }}>
+              Recruiting doesn&apos;t have to be confusing.
+            </h2>
+            <p className="fade-up" data-delay="160" style={{
+              fontFamily: 'var(--font-sans)', fontWeight: 300,
+              fontSize: '17px', lineHeight: 1.85,
+              color: 'var(--text-secondary)', marginBottom: '24px',
+            }}>
+              Most athletes don&apos;t miss opportunities because of their ability. They miss them because they don&apos;t have a clear plan — they don&apos;t know what to build, who to contact, or what to do next.
+            </p>
+            <p className="fade-up" data-delay="220" style={{
+              fontFamily: 'var(--font-sans)', fontWeight: 300,
+              fontSize: '17px', lineHeight: 1.85,
+              color: 'var(--text-secondary)',
+            }}>
+              The Recruiting Victory System gives you a profile, a college tracker, and a step-by-step course — everything you need to manage the full recruiting process, in one place.
+            </p>
+          </div>
+        </section>
+
+        {/* ── SECTION 2: THE 3 PARTS ── */}
+        <section style={{ backgroundColor: 'var(--bg-secondary)', padding: 'clamp(72px, 10vw, 120px) 24px' }}>
+          <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+            <div className="fade-up" data-delay="0" style={{
+              fontFamily: 'var(--font-mono)', fontSize: '11px',
+              textTransform: 'uppercase', letterSpacing: '0.14em',
+              color: 'var(--accent-forest)', marginBottom: '16px',
+            }}>
+              What&apos;s included
+            </div>
+            <h2 className="fade-up" data-delay="80" style={{
+              fontFamily: 'var(--font-serif)', fontWeight: 300,
+              fontSize: 'clamp(32px, 4vw, 52px)',
+              color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '56px',
+            }}>
+              Three parts. One system.
+            </h2>
+
+            <div className="parts-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2px' }}>
+              {parts.map((part, i) => (
+                <div
+                  key={part.num}
+                  className="fade-up"
+                  data-delay={i * 100}
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    border: '1px solid var(--border)',
+                    padding: '40px 32px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <div style={{
+                    fontFamily: 'var(--font-mono)', fontSize: '11px',
+                    color: 'var(--text-ghost)', letterSpacing: '0.12em',
+                    marginBottom: '20px',
+                  }}>
+                    {part.num}
+                  </div>
+                  <h3 style={{
+                    fontFamily: 'var(--font-serif)', fontWeight: 400,
+                    fontSize: '26px', color: 'var(--text-primary)',
+                    marginBottom: '16px', lineHeight: 1.2,
+                  }}>
+                    {part.name}
+                  </h3>
+                  <p style={{
+                    fontFamily: 'var(--font-sans)', fontWeight: 300,
+                    fontSize: '14px', lineHeight: 1.75,
+                    color: 'var(--text-muted)', marginBottom: '28px',
+                    flexGrow: 1,
+                  }}>
+                    {part.desc}
+                  </p>
+                  <div style={{
+                    fontFamily: 'var(--font-mono)', fontSize: '11px',
+                    color: 'var(--accent-sage)', letterSpacing: '0.06em',
+                    borderTop: '1px solid var(--border)', paddingTop: '16px',
+                  }}>
+                    → {part.outcome}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
+        </section>
 
-          {/* Block 2 — Countries */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', paddingTop: '24px' }}>
-            {countryWords.map((w, i) => (
-              <AnimatedWord key={w.text} word={w} block={1} index={i} highlighted={highlighted} align="center" />
+        {/* ── SECTION 3: HOW IT WORKS ── */}
+        <section style={{ backgroundColor: 'var(--bg-primary)', padding: 'clamp(72px, 10vw, 120px) 24px' }}>
+          <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+            <div className="fade-up" data-delay="0" style={{
+              fontFamily: 'var(--font-mono)', fontSize: '11px',
+              textTransform: 'uppercase', letterSpacing: '0.14em',
+              color: 'var(--accent-forest)', marginBottom: '32px',
+            }}>
+              The process
+            </div>
+            <h2 className="fade-up" data-delay="80" style={{
+              fontFamily: 'var(--font-serif)', fontWeight: 300,
+              fontSize: 'clamp(32px, 4vw, 52px)',
+              color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '56px',
+            }}>
+              How it works.
+            </h2>
+
+            {steps.map((item, i) => (
+              <div
+                key={item.step}
+                className="fade-up"
+                data-delay={(i + 1) * 100}
+                style={{ display: 'flex', gap: '32px', marginBottom: '48px', alignItems: 'flex-start' }}
+              >
+                <div style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '11px',
+                  color: 'var(--accent-forest)', letterSpacing: '0.12em',
+                  paddingTop: '5px', flexShrink: 0, width: '16px',
+                }}>
+                  {item.step}
+                </div>
+                <div>
+                  <h3 style={{
+                    fontFamily: 'var(--font-serif)', fontWeight: 400,
+                    fontSize: '22px', color: 'var(--text-primary)',
+                    marginBottom: '10px', lineHeight: 1.2,
+                  }}>
+                    {item.title}
+                  </h3>
+                  <p style={{
+                    fontFamily: 'var(--font-sans)', fontWeight: 300,
+                    fontSize: '15px', lineHeight: 1.75,
+                    color: 'var(--text-muted)',
+                  }}>
+                    {item.body}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
+        </section>
 
-          {/* Block 3 — Outcomes */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', paddingTop: '8px' }}>
-            {outcomeWords.map((w, i) => (
-              <AnimatedWord key={w.text} word={w} block={2} index={i} highlighted={highlighted} align="right" />
-            ))}
+        {/* ── SECTION 4: COMMAND CENTER ── */}
+        <section style={{ backgroundColor: 'var(--bg-secondary)', padding: 'clamp(72px, 10vw, 120px) 24px' }}>
+          <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+            <div className="fade-up" data-delay="0" style={{
+              fontFamily: 'var(--font-mono)', fontSize: '11px',
+              textTransform: 'uppercase', letterSpacing: '0.14em',
+              color: 'var(--accent-forest)', marginBottom: '16px',
+            }}>
+              What it looks like
+            </div>
+            <h2 className="fade-up" data-delay="80" style={{
+              fontFamily: 'var(--font-serif)', fontWeight: 300,
+              fontSize: 'clamp(32px, 4vw, 52px)',
+              color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '56px',
+            }}>
+              Your recruiting command center.
+            </h2>
+
+            <div className="parts-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px' }}>
+              {screenshots.map((item, i) => (
+                <div key={item.label} className="fade-up" data-delay={i * 100}>
+                  <div style={{
+                    aspectRatio: '4/3',
+                    backgroundColor: 'var(--bg-input)',
+                    border: '1px solid var(--border)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '16px',
+                  }}>
+                    <span style={{
+                      fontFamily: 'var(--font-mono)', fontSize: '10px',
+                      color: 'var(--text-ghost)', letterSpacing: '0.08em',
+                      textAlign: 'center', padding: '16px', lineHeight: 1.7,
+                    }}>
+                      {item.placeholder}
+                    </span>
+                  </div>
+                  <div style={{
+                    fontFamily: 'var(--font-mono)', fontSize: '11px',
+                    color: 'var(--accent-sage)', letterSpacing: '0.1em',
+                    marginBottom: '8px', textTransform: 'uppercase',
+                  }}>
+                    {item.label}
+                  </div>
+                  <p style={{
+                    fontFamily: 'var(--font-sans)', fontWeight: 300,
+                    fontSize: '13px', lineHeight: 1.7, color: 'var(--text-muted)',
+                  }}>
+                    {item.caption}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
+        </section>
 
-        </div>
-      </section>
+        {/* ── SECTION 5: WHO IT'S FOR ── */}
+        <section style={{ backgroundColor: 'var(--bg-primary)', padding: 'clamp(72px, 10vw, 120px) 24px' }}>
+          <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+            <div className="fade-up" data-delay="0" style={{
+              fontFamily: 'var(--font-mono)', fontSize: '11px',
+              textTransform: 'uppercase', letterSpacing: '0.14em',
+              color: 'var(--accent-forest)', marginBottom: '32px',
+            }}>
+              Who it&apos;s for
+            </div>
+            <h2 className="fade-up" data-delay="80" style={{
+              fontFamily: 'var(--font-serif)', fontWeight: 300,
+              fontSize: 'clamp(32px, 4vw, 52px)',
+              color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '32px',
+            }}>
+              Any athlete. Any sport.
+            </h2>
+            <p className="fade-up" data-delay="160" style={{
+              fontFamily: 'var(--font-sans)', fontWeight: 300,
+              fontSize: '17px', lineHeight: 1.85,
+              color: 'var(--text-secondary)', marginBottom: '32px',
+            }}>
+              This system is for any student-athlete pursuing college sport in the United States — regardless of sport, year, or country.
+            </p>
 
-      {/* ═══════════════════════════════════════════════════════════
-          SECTION 4 — APPLY CTA BAND
-      ════════════════════════════════════════════════════════════ */}
-      <section style={{ backgroundColor: 'var(--bg-secondary)', padding: 'clamp(64px, 8vw, 100px) 24px', textAlign: 'center' }}>
-        <div ref={ctaRef}>
+            <div className="fade-up" data-delay="220" style={{ marginBottom: '56px' }}>
+              {[
+                'High school athletes at any stage of the recruiting process',
+                'International athletes navigating the U.S. system from abroad',
+                'Parents who want to understand the process and stay involved',
+                'Athletes at any level — the system scales to where you are',
+              ].map((item) => (
+                <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', marginBottom: '14px' }}>
+                  <span style={{
+                    fontFamily: 'var(--font-mono)', fontSize: '11px',
+                    color: 'var(--accent-forest)', paddingTop: '4px', flexShrink: 0,
+                  }}>—</span>
+                  <span style={{
+                    fontFamily: 'var(--font-sans)', fontWeight: 300,
+                    fontSize: '15px', lineHeight: 1.7, color: 'var(--text-muted)',
+                  }}>
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className="divider-animated" data-delay="0" style={{ marginBottom: '32px' }} />
+            <p className="fade-up" data-delay="80" style={{
+              fontFamily: 'var(--font-sans)', fontWeight: 300,
+              fontSize: '13px', lineHeight: 1.75, color: 'var(--text-ghost)',
+            }}>
+              Recruiting Victory was built by a Division I athlete recruited by five universities, and is supported by CAPS (College Athlete Placement Standard). The system was developed in partnership with Yale Tsai City Innovation.
+            </p>
+          </div>
+        </section>
+
+        {/* ── SECTION 6: CTA ── */}
+        <section style={{ backgroundColor: 'var(--bg-secondary)', padding: 'clamp(64px, 8vw, 100px) 24px', textAlign: 'center' }}>
           <div className="fade-up" data-delay="0" style={{
             fontFamily: 'var(--font-mono)', fontSize: '11px',
             textTransform: 'uppercase', letterSpacing: '0.14em',
             color: 'var(--accent-forest)', marginBottom: '24px',
           }}>
-            Take the Next Step
+            Apply for access
           </div>
           <h2 className="fade-up" data-delay="100" style={{
-            fontFamily: 'var(--font-serif)', fontWeight: 400,
-            fontSize: '38px', color: 'var(--text-primary)', marginBottom: '24px',
+            fontFamily: 'var(--font-serif)', fontWeight: 300,
+            fontSize: 'clamp(32px, 4vw, 52px)',
+            color: 'var(--text-primary)', marginBottom: '24px', lineHeight: 1.1,
           }}>
-            Apply for a consultation.
+            Get the system.
           </h2>
           <p className="fade-up" data-delay="200" style={{
             fontFamily: 'var(--font-sans)', fontWeight: 300, fontSize: '16px',
-            color: 'var(--text-muted)', maxWidth: '420px',
-            margin: '0 auto 40px', lineHeight: 1.7,
+            color: 'var(--text-muted)', maxWidth: '400px',
+            margin: '0 auto 40px', lineHeight: 1.75,
           }}>
-            Each consultation begins with a short application. We review every submission personally before any next step is recommended.
+            Applications are reviewed individually. If accepted, you&apos;ll receive access to all three parts of the Recruiting Victory System.
           </p>
           <div className="fade-up" data-delay="300">
             <Link href="/apply" style={{ textDecoration: 'none' }}>
-              <CTAButton />
+              <ApplyButton />
             </Link>
           </div>
-        </div>
-      </section>
+        </section>
+
+      </div>
     </>
   );
 }
