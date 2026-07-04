@@ -314,14 +314,14 @@ export default function HomePage() {
             fontSize: 'clamp(22px, 3vw, 30px)', lineHeight: 1.5,
             color: 'var(--text-secondary)', marginBottom: '28px',
           }}>
-            [INSERT TESTIMONIAL — one or two sentences from a parent or athlete about how the system made recruiting feel manageable]
+            &ldquo;We signed up as a freshman to get ahead. It taught him what to focus on each year, so he had everything he needed by the time it was time to start contacting coaches. I&apos;m glad we have the confidence of knowing what to do — both now and down the road.&rdquo;
           </p>
           <p style={{
             fontFamily: 'var(--font-mono)', fontSize: '12px',
             letterSpacing: '0.1em', textTransform: 'uppercase',
             color: 'var(--text-ghost)',
           }}>
-            [Name · Sport · College]
+            Parent of a freshman athlete
           </p>
         </div>
       </section>

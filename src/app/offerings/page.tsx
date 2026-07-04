@@ -262,21 +262,36 @@ export default function ProductPage() {
 
       {/* Testimonials */}
       <section style={{ padding: '0 24px clamp(80px, 10vw, 120px)' }}>
-        <div className="fade-up" style={{ maxWidth: '680px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{
-            fontFamily: 'var(--font-serif)', fontStyle: 'italic',
-            fontSize: 'clamp(20px, 2.8vw, 26px)', lineHeight: 1.55,
-            color: 'var(--text-secondary)', marginBottom: '24px',
-          }}>
-            [INSERT TESTIMONIAL — a specific recruiting success story: sport, timeline, outcome]
-          </p>
-          <p style={{
-            fontFamily: 'var(--font-mono)', fontSize: '12px',
-            letterSpacing: '0.1em', textTransform: 'uppercase',
-            color: 'var(--text-ghost)',
-          }}>
-            [Name · Sport · College]
-          </p>
+        <div style={{ maxWidth: '780px', margin: '0 auto' }}>
+          <div className="walkthrough-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
+            {[
+              {
+                quote: 'The course covered things I hadn’t even thought of and gave me tips that put me ahead of other recruits. Having it all laid out step-by-step made the whole process click.',
+                name: 'Recruited athlete, Class of 2026',
+              },
+              {
+                quote: 'I always recommend this to families I work with — it’s affordable, and it’s one of the only things that actually keeps high schoolers engaged with their own recruiting process.',
+                name: 'High school coach',
+              },
+            ].map((t) => (
+              <div key={t.name} className="fade-up" style={{ textAlign: 'center' }}>
+                <p style={{
+                  fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+                  fontSize: 'clamp(17px, 2vw, 20px)', lineHeight: 1.6,
+                  color: 'var(--text-secondary)', marginBottom: '16px',
+                }}>
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <p style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '11px',
+                  letterSpacing: '0.1em', textTransform: 'uppercase',
+                  color: 'var(--text-ghost)',
+                }}>
+                  {t.name}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

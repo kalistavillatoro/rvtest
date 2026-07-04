@@ -85,7 +85,6 @@ export default function AboutPage() {
             {[
               { title: 'Developed at Yale', body: 'The system began at Yale Tsai City Innovation as an answer to a simple question: why don\'t student-athletes have an organized system for recruiting?' },
               { title: 'Powered by CAPS', body: 'Recruiting Victory operates alongside CAPS (College Athlete Placement Standard), an institutional framework that helps high schools strengthen their recruiting infrastructure.' },
-              { title: 'Proven with athletes', body: 'Athletes supported through this process have competed at Ivy League and Power Four programs — including Yale, Princeton, Stanford, Duke, Columbia, and Michigan — as well as Division II and III programs worldwide.' },
             ].map((item) => (
               <div key={item.title} style={{
                 backgroundColor: 'var(--bg-card)',
@@ -108,9 +107,84 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-          <p className="fade-up" data-delay="160" style={{
+        </div>
+
+        {/* Student Outcomes */}
+        <div className="divider-animated" style={{ marginBottom: '48px' }} />
+        <div style={{ marginBottom: '72px' }}>
+          <div className="fade-up" style={{
+            fontFamily: 'var(--font-mono)', fontSize: '12px',
+            textTransform: 'uppercase', letterSpacing: '0.16em',
+            color: 'var(--accent-forest)', marginBottom: '24px',
+          }}>
+            Student Outcomes
+          </div>
+          <div className="fade-up" data-delay="80" style={{ display: 'grid', gap: '16px', marginBottom: '28px' }}>
+            {[
+              {
+                name: 'Amaya B.',
+                tag: 'From India',
+                result: 'Offers from Yale, Princeton, Stanford & 4 other Ivy League schools',
+                note: 'Navigated the full process successfully across time zones.',
+              },
+              {
+                name: 'Lauren & Marella V.',
+                tag: 'Twin athletes',
+                result: '7 combined offers — both committed to Northwestern University',
+                note: 'The CAPS framework handled the complexity of twin athletes recruiting simultaneously.',
+              },
+              {
+                name: 'Elizabeth D.',
+                tag: 'Started as a senior',
+                result: 'D1 and Ivy League offers — committed to Duke University',
+                note: 'Began the process with no prior outreach. CAPS enabled a full late-stage recruiting campaign.',
+              },
+              {
+                name: 'Rebecca B.',
+                tag: 'Serious injury during process',
+                result: 'Offer from UC Irvine — D1 program',
+                note: 'The CAPS framework helped navigate injury disclosure and sustained coach communication successfully.',
+              },
+            ].map((item) => (
+              <div key={item.name} style={{
+                backgroundColor: 'var(--bg-card)',
+                border: '1px solid var(--border)',
+                borderRadius: '14px',
+                padding: '24px 28px',
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
+                  <h3 style={{ fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: '16px', color: 'var(--text-primary)' }}>
+                    {item.name}
+                  </h3>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-ghost)', letterSpacing: '0.04em' }}>
+                    {item.tag}
+                  </span>
+                </div>
+                <p style={{ fontFamily: 'var(--font-sans)', fontWeight: 500, fontSize: '15px', color: 'var(--accent-forest)', marginBottom: '6px', lineHeight: 1.5 }}>
+                  {item.result}
+                </p>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.6, color: 'var(--text-muted)' }}>
+                  {item.note}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="fade-up" data-delay="140" style={{
+            fontFamily: 'var(--font-mono)', fontSize: '11px',
+            textTransform: 'uppercase', letterSpacing: '0.1em',
+            color: 'var(--text-ghost)', marginBottom: '10px',
+          }}>
+            Athletes admitted at
+          </p>
+          <p className="fade-up" data-delay="180" style={{
+            fontFamily: 'var(--font-sans)', fontSize: '14.5px',
+            lineHeight: 1.8, color: 'var(--text-secondary)', marginBottom: '20px',
+          }}>
+            Yale · Princeton · Stanford · Columbia · Duke · Dartmouth · Cornell · Brown · Northwestern · UC Irvine · Michigan State · and more
+          </p>
+          <p className="fade-up" data-delay="220" style={{
             fontFamily: 'var(--font-sans)', fontSize: '13px',
-            lineHeight: 1.7, color: 'var(--text-ghost)', marginTop: '20px',
+            lineHeight: 1.7, color: 'var(--text-ghost)',
           }}>
             Outcomes are context, not a guarantee. Every athlete&apos;s situation, sport, and goals are different.
           </p>
