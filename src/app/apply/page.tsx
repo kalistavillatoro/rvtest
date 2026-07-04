@@ -16,13 +16,13 @@ const inputStyle: React.CSSProperties = {
   display: 'block',
   width: '100%',
   fontFamily: 'var(--font-sans)',
-  fontWeight: 300,
+  fontWeight: 400,
   fontSize: '15px',
   backgroundColor: 'var(--bg-input)',
   border: '1px solid var(--border-input)',
   color: 'var(--text-primary)',
   padding: '14px 16px',
-  borderRadius: 0,
+  borderRadius: 8,
   outline: 'none',
   boxSizing: 'border-box',
 };
@@ -168,12 +168,12 @@ export default function ApplyPage() {
             display: 'block',
             marginBottom: '24px',
           }}>
-            Application Received
+            Message Received
           </span>
           <h1 style={{
-            fontFamily: 'var(--font-serif)',
-            fontWeight: 300,
-            fontSize: '52px',
+            fontFamily: 'var(--font-sans)',
+            fontWeight: 600,
+            fontSize: '48px',
             color: 'var(--text-primary)',
             marginBottom: '24px',
             lineHeight: 1.1,
@@ -219,28 +219,31 @@ export default function ApplyPage() {
             color: 'var(--accent-forest)',
             marginBottom: '24px',
           }}>
-            Application
+            Contact
           </div>
           <h1 style={{
-            fontFamily: 'var(--font-serif)',
-            fontWeight: 300,
-            fontSize: '52px',
+            fontFamily: 'var(--font-sans)',
+            fontWeight: 600,
+            fontSize: 'clamp(36px, 5vw, 48px)',
+            letterSpacing: '-0.025em',
             color: 'var(--text-primary)',
-            lineHeight: 1.1,
+            lineHeight: 1.08,
             marginBottom: '28px',
           }}>
-            Apply for access.
+            Tell us about
+            <br />
+            your situation.
           </h1>
           <p style={{
             fontFamily: 'var(--font-sans)',
-            fontWeight: 300,
+            fontWeight: 400,
             fontSize: '15px',
-            lineHeight: 1.85,
+            lineHeight: 1.8,
             color: 'var(--text-muted)',
             maxWidth: '320px',
             marginBottom: '40px',
           }}>
-            Tell us a little about your situation. Applications are reviewed individually — there&apos;s no purchase at this stage. If accepted, you&apos;ll receive access to the full Recruiting Victory System.
+            Have questions before getting the system, or interested in individual advisory support? Share a little about your athlete and we&apos;ll respond within 3–5 business days with a recommended next step.
           </p>
           <div style={{
             fontFamily: 'var(--font-mono)',
@@ -255,10 +258,11 @@ export default function ApplyPage() {
 
         {/* Right Column — Form */}
         <div className="apply-form-box" style={{
-          backgroundColor: 'var(--bg-secondary)',
+          backgroundColor: 'var(--bg-card)',
           padding: '48px',
           border: '1px solid var(--border)',
-          borderRadius: 0,
+          borderRadius: '16px',
+          boxShadow: 'var(--shadow-card)',
         }}>
           <form onSubmit={handleSubmit}>
 
@@ -354,23 +358,22 @@ export default function ApplyPage() {
               style={{
                 display: 'block',
                 width: '100%',
-                backgroundColor: submitHovered ? 'var(--accent-sage)' : 'var(--text-primary)',
-                color: 'var(--bg-primary)',
+                backgroundColor: submitHovered ? 'var(--accent-forest-dark)' : 'var(--accent-forest)',
+                color: '#FFFFFF',
                 fontFamily: 'var(--font-sans)',
                 fontWeight: 500,
-                fontSize: '12px',
-                letterSpacing: '0.16em',
+                fontSize: '15px',
+                letterSpacing: '0.01em',
                 padding: '16px',
-                textTransform: 'uppercase',
                 border: 'none',
-                borderRadius: 0,
+                borderRadius: '10px',
                 cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
                 opacity: status === 'submitting' ? 0.7 : 1,
                 transition: 'background-color 0.3s ease',
                 marginBottom: '20px',
               }}
             >
-              {status === 'submitting' ? 'Submitting...' : 'Submit Application'}
+              {status === 'submitting' ? 'Submitting...' : 'Send Message'}
             </button>
 
             {status === 'error' && (
@@ -394,7 +397,7 @@ export default function ApplyPage() {
               textAlign: 'center',
               lineHeight: 1.6,
             }}>
-              Submitting this form is not a purchase or commitment. We review every application before recommending a next step.
+              Sending this form is not a purchase or commitment. We read every message and respond personally.
             </p>
 
           </form>

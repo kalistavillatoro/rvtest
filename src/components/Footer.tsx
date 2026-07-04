@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer style={{
@@ -6,12 +8,13 @@ export default function Footer() {
       borderTop: '1px solid var(--border)',
       padding: '48px 0 36px',
     }}>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '0 48px',
-      }}
-      className="footer-inner"
+      <div
+        style={{
+          maxWidth: '1040px',
+          margin: '0 auto',
+          padding: '0 48px',
+        }}
+        className="footer-inner"
       >
         <div style={{
           display: 'flex',
@@ -19,17 +22,29 @@ export default function Footer() {
           justifyContent: 'space-between',
           flexWrap: 'wrap',
           gap: '16px',
-          marginBottom: '24px',
+          marginBottom: '28px',
         }}>
           <span style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
+            fontSize: '12px',
             textTransform: 'uppercase',
-            color: 'var(--text-ghost)',
-            letterSpacing: '0.1em',
+            color: 'var(--text-muted)',
+            letterSpacing: '0.12em',
           }}>
             Recruiting Victory
           </span>
+
+          <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+            <Link href="/offerings" style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--text-muted)' }}>
+              Inside the System
+            </Link>
+            <Link href="/about" style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--text-muted)' }}>
+              About
+            </Link>
+            <Link href="/apply" style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--text-muted)' }}>
+              Contact
+            </Link>
+          </div>
 
           <a
             href="https://www.capsglobal.org"
@@ -37,47 +52,45 @@ export default function Footer() {
             rel="noopener noreferrer"
             style={{
               fontFamily: 'var(--font-sans)',
-              fontWeight: 300,
-              fontSize: '12px',
+              fontSize: '13px',
               color: 'var(--text-ghost)',
-              textDecoration: 'none',
             }}
           >
             Powered by CAPS (College Athlete Placement Standard)
-          </a>
-
-          <a
-            href="mailto:caps@capsglobal.org"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
-              color: 'var(--text-ghost)',
-              letterSpacing: '0.05em',
-              textDecoration: 'none',
-            }}
-          >
-            caps@capsglobal.org
           </a>
         </div>
 
         <div style={{
           borderTop: '1px solid var(--border)',
           paddingTop: '20px',
-          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '12px',
         }}>
           <span style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '10px',
-            letterSpacing: '0.12em',
+            fontSize: '11px',
+            letterSpacing: '0.1em',
             color: 'var(--text-ghost)',
-            opacity: 0.7,
           }}>
-            <a href="/privacy" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy Policy</a>
+            <a href="/privacy" style={{ color: 'inherit' }}>Privacy Policy</a>
             {' · '}
-            <a href="/terms" style={{ color: 'inherit', textDecoration: 'none' }}>Terms of Service</a>
+            <a href="/terms" style={{ color: 'inherit' }}>Terms of Service</a>
             {' · '}
-            <a href="/accessibility" style={{ color: 'inherit', textDecoration: 'none' }}>Accessibility Statement</a>
+            <a href="/accessibility" style={{ color: 'inherit' }}>Accessibility</a>
           </span>
+          <a
+            href="mailto:caps@capsglobal.org"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              letterSpacing: '0.05em',
+              color: 'var(--text-ghost)',
+            }}
+          >
+            caps@capsglobal.org
+          </a>
         </div>
       </div>
     </footer>

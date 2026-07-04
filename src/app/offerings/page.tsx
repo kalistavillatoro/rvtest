@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
+import { STRIPE_CHECKOUT_URL } from '@/lib/site';
 
 function useFadeUp() {
   const ref = useRef<HTMLDivElement>(null);
@@ -23,163 +23,319 @@ function useFadeUp() {
   return ref;
 }
 
-function ApplyButton() {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <Link href="/apply" style={{ textDecoration: 'none' }}>
-      <button
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{
-          border: `1px solid ${hovered ? 'var(--accent-forest)' : 'var(--accent-sage)'}`,
-          backgroundColor: hovered ? 'var(--accent-forest)' : 'transparent',
-          color: hovered ? 'var(--text-primary)' : 'var(--accent-sage)',
-          fontFamily: 'var(--font-sans)', fontWeight: 500,
-          fontSize: '12px', letterSpacing: '0.16em',
-          padding: '14px 36px', textTransform: 'uppercase',
-          cursor: 'pointer', transition: 'all 0.3s ease', borderRadius: 0,
-        }}
-      >
-        Apply for Access
-      </button>
-    </Link>
-  );
-}
-
-const parts = [
+const walkthrough = [
   {
-    num: '01',
-    name: 'My Profile',
-    what: 'A guided spreadsheet where you enter your recruiting information — stats, academic records, video links, contact details, and anything else a college coach needs to evaluate you.',
-    how: 'The spreadsheet includes embedded guidance and best practices at each step. You don\'t need to know what colleges want. The profile walks you through it.',
-    outcome: 'You finish with a complete, organized recruiting profile that\'s ready to share with any school.',
+    label: 'Your Profile',
+    title: 'Everything coaches need, in one place.',
+    body: 'A guided profile where you enter your stats, academics, video links, and key details. Built-in guidance shows you exactly what coaches look for — so your profile is complete, professional, and easy to evaluate.',
+    placeholder: '[INSERT PROFILE DASHBOARD SCREENSHOT]',
   },
   {
-    num: '02',
-    name: 'My Colleges',
-    what: 'A tracking system for your college list and outreach. You organize target schools, log communication with coaches, and use built-in email templates to make sure your outreach is clear and professional.',
-    how: 'The tracker keeps follow-ups visible so nothing falls through the cracks. Every coach conversation lives in one place, with a clear record of where each school stands.',
-    outcome: 'You stay organized and consistent — the two things most athletes aren\'t.',
+    label: 'Your Colleges',
+    title: 'Every school. Every conversation. Tracked.',
+    body: 'Organize your target colleges and log every coach interaction. Built-in email templates take the guesswork out of outreach, and follow-up tracking makes sure no opportunity slips away.',
+    placeholder: '[INSERT COLLEGE TRACKER SCREENSHOT]',
   },
   {
-    num: '03',
-    name: 'The Course',
-    what: 'A step-by-step guide that teaches you the full recruiting process from start to finish. It covers what to do, when to do it, and why each step matters.',
-    how: 'The Course is designed to support everything else in the system. When you\'re not sure what to do next, the Course tells you. It removes the guesswork entirely.',
-    outcome: 'You always know your next step — and the reasoning behind it.',
+    label: 'Your Plan',
+    title: 'Always know your next step.',
+    body: 'A step-by-step guide through the entire recruiting process — what to do, when to do it, and why it matters. From your first email to your final decision, you\'re never guessing.',
+    placeholder: '[INSERT STEP-BY-STEP GUIDE SCREENSHOT]',
   },
 ];
 
-export default function OfferingsPage() {
+const included = [
+  'Guided recruiting profile with embedded best practices',
+  'College outreach tracker with follow-up management',
+  'Proven email templates for every stage of coach contact',
+  'Step-by-step course covering the full recruiting timeline',
+  'Guidance for highlight video, transcripts, and test scores',
+  'Works for every sport, every level, U.S. and international',
+];
+
+const faqs = [
+  {
+    q: 'Who is this for?',
+    a: 'Any student-athlete pursuing college sports in the United States — any sport, any level, from freshmen just starting out to seniors deep in conversations with coaches. Parents use it right alongside their athletes.',
+  },
+  {
+    q: 'When should we start?',
+    a: 'Earlier is better, but there\'s no wrong time. The system meets you where you are — whether you haven\'t contacted a single coach yet or you\'re already fielding interest.',
+  },
+  {
+    q: 'Does it work for international athletes?',
+    a: 'Yes. The system was built with international families in mind and covers the specific steps international athletes need to navigate the U.S. recruiting process.',
+  },
+  {
+    q: 'How is it delivered?',
+    a: 'Instantly, as a digital dashboard you open in your browser. No software to install. You\'ll receive access right after checkout.',
+  },
+  {
+    q: 'What if we want more hands-on help?',
+    a: 'The system is designed to be fully self-serve. If your family wants individual advisory support on top of it, tell us about your situation through the application form and we\'ll follow up.',
+  },
+];
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ borderBottom: '1px solid var(--border)' }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          width: '100%',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          padding: '24px 0',
+          background: 'none', border: 'none', cursor: 'pointer',
+          textAlign: 'left',
+        }}
+      >
+        <span style={{
+          fontFamily: 'var(--font-sans)', fontWeight: 500,
+          fontSize: '17px', color: 'var(--text-primary)',
+        }}>
+          {q}
+        </span>
+        <span style={{
+          fontFamily: 'var(--font-sans)', fontSize: '22px', fontWeight: 300,
+          color: 'var(--text-ghost)', flexShrink: 0, marginLeft: '16px',
+          transform: open ? 'rotate(45deg)' : 'none',
+          transition: 'transform 0.3s var(--ease)',
+        }}>
+          +
+        </span>
+      </button>
+      <div style={{
+        maxHeight: open ? '300px' : '0',
+        overflow: 'hidden',
+        transition: 'max-height 0.4s var(--ease)',
+      }}>
+        <p style={{
+          fontFamily: 'var(--font-sans)', fontSize: '15px',
+          lineHeight: 1.7, color: 'var(--text-muted)',
+          paddingBottom: '24px', maxWidth: '560px',
+        }}>
+          {a}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default function ProductPage() {
   const pageRef = useFadeUp();
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', paddingTop: 'clamp(80px, 15vw, 120px)', paddingBottom: 'clamp(80px, 12vw, 140px)' }}>
-      <div ref={pageRef} style={{ maxWidth: '720px', margin: '0 auto', padding: '0 24px' }}>
+    <div ref={pageRef} style={{ backgroundColor: 'var(--bg-primary)', paddingTop: 'clamp(120px, 18vh, 170px)' }}>
 
-        {/* Header */}
-        <div style={{ marginBottom: '72px' }}>
-          <div className="fade-up" data-delay="0" style={{
-            fontFamily: 'var(--font-mono)', fontSize: '11px',
-            textTransform: 'uppercase', letterSpacing: '0.14em',
+      {/* Header */}
+      <section style={{ padding: '0 24px clamp(64px, 8vw, 96px)', textAlign: 'center' }}>
+        <div style={{ maxWidth: '680px', margin: '0 auto' }}>
+          <div className="fade-up" style={{
+            fontFamily: 'var(--font-mono)', fontSize: '12px',
+            textTransform: 'uppercase', letterSpacing: '0.16em',
             color: 'var(--accent-forest)', marginBottom: '24px',
           }}>
-            The System
+            Inside the System
           </div>
-          <h1 className="fade-up heading-interactive" data-delay="80" style={{
-            fontFamily: 'var(--font-serif)', fontWeight: 300,
-            fontSize: 'clamp(40px, 5vw, 60px)',
-            color: 'var(--text-primary)', lineHeight: 1.05, marginBottom: '32px',
+          <h1 className="fade-up" data-delay="80" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 600,
+            fontSize: 'clamp(36px, 5.5vw, 56px)', letterSpacing: '-0.025em',
+            color: 'var(--text-primary)', lineHeight: 1.08, marginBottom: '24px',
           }}>
-            Everything in one place.
+            Everything inside
+            <br />
+            Recruiting Victory.
           </h1>
           <p className="fade-up" data-delay="160" style={{
-            fontFamily: 'var(--font-sans)', fontWeight: 300,
-            fontSize: '17px', lineHeight: 1.85,
-            color: 'var(--text-muted)', maxWidth: '560px', marginBottom: '40px',
+            fontFamily: 'var(--font-sans)', fontSize: '18px',
+            lineHeight: 1.65, color: 'var(--text-muted)',
+            maxWidth: '520px', margin: '0 auto',
           }}>
-            The Recruiting Victory System is three tools built to work together. A profile. A college tracker. A course. Together, they give you structure, organization, and a clear plan — from your first outreach to your final decision.
+            One purchase. One dashboard. A complete system that guides your family through recruiting from start to finish.
           </p>
-          <div className="divider-animated" data-delay="220" />
         </div>
+      </section>
 
-        {/* The 3 Parts — detailed */}
-        {parts.map((part, idx) => (
-          <div key={part.num}>
-            <div style={{ padding: '56px 0' }}>
-              <div className="fade-up" data-delay="0" style={{
-                fontFamily: 'var(--font-mono)', fontSize: '11px',
+      {/* Walkthrough — alternating text + screenshot */}
+      {walkthrough.map((item, i) => (
+        <section
+          key={item.label}
+          style={{
+            padding: 'clamp(48px, 6vw, 80px) 24px',
+            backgroundColor: i % 2 === 1 ? 'var(--bg-secondary)' : 'var(--bg-primary)',
+          }}
+        >
+          <div
+            className="walkthrough-grid"
+            style={{
+              maxWidth: '1040px', margin: '0 auto',
+              display: 'grid',
+              gridTemplateColumns: i % 2 === 1 ? '1.2fr 1fr' : '1fr 1.2fr',
+              gap: '64px', alignItems: 'center',
+            }}
+          >
+            <div className="fade-up" style={{ order: i % 2 === 1 ? 2 : 1 }}>
+              <div style={{
+                fontFamily: 'var(--font-mono)', fontSize: '12px',
                 textTransform: 'uppercase', letterSpacing: '0.14em',
-                color: 'var(--text-ghost)', marginBottom: '12px',
+                color: 'var(--accent-forest)', marginBottom: '16px',
               }}>
-                {part.num}
+                {item.label}
               </div>
-              <h2 className="fade-up heading-interactive" data-delay="60" style={{
-                fontFamily: 'var(--font-serif)', fontWeight: 400,
-                fontSize: 'clamp(28px, 3.5vw, 40px)',
-                color: 'var(--text-primary)', marginBottom: '28px', lineHeight: 1.15,
+              <h2 style={{
+                fontFamily: 'var(--font-sans)', fontWeight: 600,
+                fontSize: 'clamp(26px, 3.2vw, 36px)', letterSpacing: '-0.02em',
+                color: 'var(--text-primary)', lineHeight: 1.15, marginBottom: '18px',
               }}>
-                {part.name}
+                {item.title}
               </h2>
-
-              <div className="fade-up" data-delay="120" style={{ marginBottom: '20px' }}>
-                <p style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '10px',
-                  textTransform: 'uppercase', letterSpacing: '0.14em',
-                  color: 'var(--accent-forest)', marginBottom: '10px',
-                }}>What it is</p>
-                <p style={{
-                  fontFamily: 'var(--font-sans)', fontWeight: 300,
-                  fontSize: '15px', lineHeight: 1.8, color: 'var(--text-muted)',
-                }}>
-                  {part.what}
-                </p>
-              </div>
-
-              <div className="fade-up" data-delay="180" style={{ marginBottom: '28px' }}>
-                <p style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '10px',
-                  textTransform: 'uppercase', letterSpacing: '0.14em',
-                  color: 'var(--accent-forest)', marginBottom: '10px',
-                }}>How it works</p>
-                <p style={{
-                  fontFamily: 'var(--font-sans)', fontWeight: 300,
-                  fontSize: '15px', lineHeight: 1.8, color: 'var(--text-muted)',
-                }}>
-                  {part.how}
-                </p>
-              </div>
-
-              <div className="fade-up" data-delay="240" style={{
-                fontFamily: 'var(--font-mono)', fontSize: '11px',
-                color: 'var(--accent-sage)', letterSpacing: '0.06em',
-                borderLeft: '2px solid var(--accent-forest)',
-                paddingLeft: '16px',
+              <p style={{
+                fontFamily: 'var(--font-sans)', fontSize: '16px',
+                lineHeight: 1.7, color: 'var(--text-muted)', maxWidth: '440px',
               }}>
-                → {part.outcome}
+                {item.body}
+              </p>
+            </div>
+            <div className="fade-up" data-delay="120" style={{ order: i % 2 === 1 ? 1 : 2 }}>
+              <div className="screenshot-frame">
+                <div className="frame-bar">
+                  <span className="frame-dot" /><span className="frame-dot" /><span className="frame-dot" />
+                </div>
+                <div style={{
+                  aspectRatio: '4/3',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <span style={{
+                    fontFamily: 'var(--font-mono)', fontSize: '11px',
+                    color: 'var(--text-ghost)', letterSpacing: '0.08em',
+                    textAlign: 'center', padding: '20px', lineHeight: 1.8,
+                  }}>
+                    {item.placeholder}
+                  </span>
+                </div>
               </div>
             </div>
-            {idx < parts.length - 1 && (
-              <div className="divider-animated" data-delay="0" />
-            )}
           </div>
-        ))}
+        </section>
+      ))}
 
-        {/* CTA */}
-        <div className="divider-animated" data-delay="0" style={{ marginBottom: '72px' }} />
-        <div className="fade-up" data-delay="0" style={{ textAlign: 'center' }}>
-          <p style={{
-            fontFamily: 'var(--font-sans)', fontWeight: 300,
-            fontSize: '16px', lineHeight: 1.85,
-            color: 'var(--text-muted)', maxWidth: '460px',
-            margin: '0 auto 40px',
+      {/* What's included */}
+      <section style={{ padding: 'clamp(80px, 10vw, 120px) 24px' }}>
+        <div style={{ maxWidth: '680px', margin: '0 auto' }}>
+          <h2 className="fade-up" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 600,
+            fontSize: 'clamp(28px, 3.8vw, 40px)', letterSpacing: '-0.02em',
+            color: 'var(--text-primary)', textAlign: 'center',
+            marginBottom: 'clamp(40px, 5vw, 56px)',
           }}>
-            Access to the system is application-based. We review every submission individually before providing access.
-          </p>
-          <ApplyButton />
+            What&apos;s included
+          </h2>
+          <div className="fade-up" data-delay="100" style={{
+            backgroundColor: 'var(--bg-card)',
+            border: '1px solid var(--border)',
+            borderRadius: '16px',
+            padding: 'clamp(28px, 4vw, 44px)',
+            boxShadow: 'var(--shadow-card)',
+          }}>
+            {included.map((item, i) => (
+              <div key={item} style={{
+                display: 'flex', alignItems: 'flex-start', gap: '14px',
+                padding: '12px 0',
+                borderBottom: i < included.length - 1 ? '1px solid var(--border)' : 'none',
+              }}>
+                <span style={{
+                  color: 'var(--accent-forest)', fontWeight: 600,
+                  fontSize: '15px', paddingTop: '1px', flexShrink: 0,
+                }}>✓</span>
+                <span style={{
+                  fontFamily: 'var(--font-sans)', fontSize: '15.5px',
+                  lineHeight: 1.6, color: 'var(--text-secondary)',
+                }}>
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
 
-      </div>
+      {/* Testimonials */}
+      <section style={{ padding: '0 24px clamp(80px, 10vw, 120px)' }}>
+        <div className="fade-up" style={{ maxWidth: '680px', margin: '0 auto', textAlign: 'center' }}>
+          <p style={{
+            fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+            fontSize: 'clamp(20px, 2.8vw, 26px)', lineHeight: 1.55,
+            color: 'var(--text-secondary)', marginBottom: '24px',
+          }}>
+            [INSERT TESTIMONIAL — a specific recruiting success story: sport, timeline, outcome]
+          </p>
+          <p style={{
+            fontFamily: 'var(--font-mono)', fontSize: '12px',
+            letterSpacing: '0.1em', textTransform: 'uppercase',
+            color: 'var(--text-ghost)',
+          }}>
+            [Name · Sport · College]
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section style={{ padding: '0 24px clamp(80px, 10vw, 120px)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <h2 className="fade-up" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 600,
+            fontSize: 'clamp(28px, 3.8vw, 40px)', letterSpacing: '-0.02em',
+            color: 'var(--text-primary)', textAlign: 'center',
+            marginBottom: 'clamp(32px, 4vw, 48px)',
+          }}>
+            Common questions
+          </h2>
+          <div className="fade-up" data-delay="100">
+            {faqs.map((faq) => (
+              <FaqItem key={faq.q} q={faq.q} a={faq.a} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section style={{
+        padding: 'clamp(80px, 10vw, 120px) 24px',
+        backgroundColor: 'var(--accent-forest)',
+        textAlign: 'center',
+      }}>
+        <div style={{ maxWidth: '560px', margin: '0 auto' }}>
+          <h2 className="fade-up" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 600,
+            fontSize: 'clamp(28px, 4vw, 44px)', letterSpacing: '-0.02em',
+            color: '#FFFFFF', lineHeight: 1.15, marginBottom: '18px',
+          }}>
+            Get the complete system.
+          </h2>
+          <p className="fade-up" data-delay="80" style={{
+            fontFamily: 'var(--font-sans)', fontSize: '17px',
+            color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, marginBottom: '32px',
+          }}>
+            Instant access after checkout. Start building your profile tonight.
+          </p>
+          <div className="fade-up" data-delay="160">
+            <a
+              href={STRIPE_CHECKOUT_URL}
+              className="btn-primary"
+              style={{
+                backgroundColor: '#FFFFFF',
+                color: 'var(--accent-forest)',
+                fontSize: '17px',
+                padding: '18px 40px',
+              }}
+            >
+              Get the System
+            </a>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
