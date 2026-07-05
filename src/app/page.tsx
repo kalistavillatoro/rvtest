@@ -170,7 +170,7 @@ export default function HomePage() {
         }}>
           {[
             'Founded by a Yale D1 athlete',
-            'Backed by the CAPS framework',
+            'Backed by the College Athlete Placement Standard',
             'Placements at Yale, Princeton, Stanford & Duke',
           ].map((item) => (
             <span key={item} style={{
