@@ -48,15 +48,27 @@ export default function Nav() {
           transition: 'background-color 0.35s ease, border-color 0.35s ease',
         }}
       >
-        <Link href="/" style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '13px',
-          letterSpacing: '0.14em',
-          color: 'var(--text-primary)',
-          textTransform: 'uppercase',
-          fontWeight: 400,
-        }}>
-          Recruiting Victory
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="8" fill="var(--accent-forest)" />
+            <path
+              d="M9 16.5 L14 21.5 L23.5 10.5"
+              fill="none"
+              stroke="#FDFCFA"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '16.5px',
+            fontWeight: 700,
+            letterSpacing: '-0.015em',
+            color: 'var(--text-primary)',
+          }}>
+            Recruiting Victory
+          </span>
         </Link>
 
         {/* Desktop links */}

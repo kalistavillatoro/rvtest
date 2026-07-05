@@ -24,14 +24,27 @@ export default function Footer() {
           gap: '16px',
           marginBottom: '28px',
         }}>
-          <span style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '12px',
-            textTransform: 'uppercase',
-            color: 'var(--text-muted)',
-            letterSpacing: '0.12em',
-          }}>
-            Recruiting Victory
+          <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true">
+              <rect width="32" height="32" rx="8" fill="var(--accent-forest)" />
+              <path
+                d="M9 16.5 L14 21.5 L23.5 10.5"
+                fill="none"
+                stroke="#FDFCFA"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '14.5px',
+              fontWeight: 700,
+              letterSpacing: '-0.01em',
+              color: 'var(--text-primary)',
+            }}>
+              Recruiting Victory
+            </span>
           </span>
 
           <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
