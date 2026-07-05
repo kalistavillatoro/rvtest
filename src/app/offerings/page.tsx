@@ -27,7 +27,7 @@ const walkthrough = [
   {
     label: 'Your Profile',
     title: 'Everything coaches need, in one place.',
-    body: 'A guided profile where you enter your stats, academics, video links, and key details. Built-in guidance shows you exactly what coaches look for — so your profile is complete, professional, and easy to evaluate.',
+    body: 'A private, guided profile where you enter your stats, academics, video links, and key details. Built-in guidance shows you exactly what coaches look for — so when you\'re ready to share it, your profile is complete, professional, and easy to evaluate. Coaches never see this dashboard directly; it\'s yours until you send it.',
     image: '/my-profile.jpg',
   },
   {
@@ -69,6 +69,10 @@ const faqs = [
   {
     q: 'How is it delivered?',
     a: 'Within 24 hours of checkout, you\'ll get an email with your own Recruiting Victory dashboard link — already set up with your name, sport, and class year — plus a short welcome video showing you how to use it. It\'s a web link, not an app to download, so you just bookmark it and return anytime.',
+  },
+  {
+    q: 'Do coaches see my Recruiting Victory dashboard?',
+    a: 'No. Your dashboard is completely private — it\'s a tool for you, not a portal coaches log into. My Profile helps you build and organize your information, and My Colleges helps you track outreach, but nothing is visible to a coach unless you choose to send it. You stay in control of what gets shared, and when.',
   },
   {
     q: 'What if we want more hands-on help?',

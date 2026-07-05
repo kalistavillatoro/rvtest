@@ -66,7 +66,7 @@ const steps = [
   {
     num: '1',
     title: 'Build your profile',
-    body: 'Enter your stats, academics, and highlights into a guided profile that coaches instantly understand.',
+    body: 'Enter your stats, academics, and highlights into a private, guided profile — organized exactly the way coaches expect once you share it with them.',
   },
   {
     num: '2',
@@ -81,7 +81,7 @@ const steps = [
 ];
 
 const outcomes = [
-  { title: 'A profile coaches understand', body: 'Everything a college coach needs to evaluate you, organized in one place.' },
+  { title: 'A profile coaches understand', body: 'Everything a college coach needs to evaluate you, organized in one place and ready for you to share when you reach out.' },
   { title: 'An organized college list', body: 'Your target schools, tracked from first contact to offer.' },
   { title: 'Templates for every email', body: 'Never stare at a blank message to a coach again.' },
   { title: 'A plan for the whole process', body: 'Know your next step at every stage of recruiting.' },
