@@ -103,28 +103,55 @@ export default function HomePage() {
             fontFamily: 'var(--font-sans)', fontSize: '13px',
             color: 'var(--text-ghost)', marginTop: '20px',
           }}>
+            $13.99 every 4 weeks · Cancel anytime
+          </p>
+          <p className="fade-up" data-delay="320" style={{
+            fontFamily: 'var(--font-sans)', fontSize: '13px',
+            color: 'var(--text-ghost)', marginTop: '4px',
+          }}>
             Every sport · Every level · U.S. &amp; international athletes
           </p>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════
-          PRODUCT SHOT — show, don't tell
+          PRODUCT SHOT — every athlete gets their own
       ═══════════════════════════════════════════ */}
       <section style={{ padding: '0 24px clamp(64px, 8vw, 104px)' }}>
-        <div className="fade-up" data-delay="100" style={{ maxWidth: '960px', margin: '0 auto' }}>
-          <div className="screenshot-frame">
-            <div className="frame-bar">
-              <span className="frame-dot" /><span className="frame-dot" /><span className="frame-dot" />
-            </div>
-            <div style={{ backgroundColor: 'var(--bg-card)' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/homepage-dashboard.jpg"
-                alt="Recruiting Victory dashboard — profile, colleges, and plan in one view"
-                style={{ display: 'block', width: '100%', height: 'auto' }}
-              />
-            </div>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
+          <p className="fade-up" data-delay="100" style={{
+            fontFamily: 'var(--font-mono)', fontSize: '12px',
+            textTransform: 'uppercase', letterSpacing: '0.14em',
+            color: 'var(--accent-forest)', marginBottom: '32px',
+          }}>
+            Built for every athlete
+          </p>
+          <div className="outcome-grid" style={{
+            display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px',
+          }}>
+            {[
+              { img: '/andre dashboard mockup.jpg', name: 'Andre', sport: 'Football' },
+              { img: '/jana dashboard mockup.jpg', name: 'Jana', sport: 'Swimming' },
+              { img: '/layne dashboard mockup.jpg', name: 'Layne', sport: 'Lacrosse' },
+              { img: '/Jamie dashboard mockup.jpg', name: 'Jamie', sport: 'Track & XC' },
+            ].map((m, i) => (
+              <div key={m.name} className="fade-up card-lift" data-delay={i * 80}>
+                <div className="screenshot-frame" style={{ marginBottom: '12px' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={m.img}
+                    alt={`${m.name}'s Recruiting Victory dashboard`}
+                    style={{ display: 'block', width: '100%', height: 'auto' }}
+                  />
+                </div>
+                <p style={{
+                  fontFamily: 'var(--font-sans)', fontSize: '13px',
+                  color: 'var(--text-ghost)',
+                }}>
+                  {m.name} · {m.sport}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -144,8 +171,8 @@ export default function HomePage() {
           gap: '12px 40px',
         }}>
           {[
-            'Built by a Division I athlete',
-            'Developed at Yale',
+            'Built by a recruited Division I athlete',
+            'Backed by the CAPS framework',
             'Placements at Yale, Princeton, Stanford & Duke',
           ].map((item) => (
             <span key={item} style={{
@@ -358,9 +385,15 @@ export default function HomePage() {
               Get the System
             </a>
           </div>
+          <p className="fade-up" data-delay="190" style={{
+            fontFamily: 'var(--font-sans)', fontSize: '13px',
+            color: 'rgba(255,255,255,0.6)', marginTop: '16px',
+          }}>
+            $13.99 every 4 weeks · Cancel anytime
+          </p>
           <p className="fade-up" data-delay="220" style={{
             fontFamily: 'var(--font-sans)', fontSize: '13px',
-            color: 'rgba(255,255,255,0.55)', marginTop: '24px',
+            color: 'rgba(255,255,255,0.55)', marginTop: '16px',
           }}>
             Questions first? <Link href="/apply" style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'underline' }}>Tell us about your situation</Link> and we&apos;ll point you in the right direction.
           </p>

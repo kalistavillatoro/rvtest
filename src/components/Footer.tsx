@@ -44,6 +44,14 @@ export default function Footer() {
             <Link href="/apply" style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--text-muted)' }}>
               Contact
             </Link>
+            <a
+              href="https://www.instagram.com/recruitingvictory"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--text-muted)' }}
+            >
+              Instagram
+            </a>
           </div>
 
           <a

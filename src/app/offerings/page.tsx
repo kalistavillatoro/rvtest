@@ -342,6 +342,12 @@ export default function ProductPage() {
               Get the System
             </a>
           </div>
+          <p className="fade-up" data-delay="220" style={{
+            fontFamily: 'var(--font-sans)', fontSize: '13px',
+            color: 'rgba(255,255,255,0.6)', marginTop: '16px',
+          }}>
+            $13.99 every 4 weeks · Cancel anytime
+          </p>
         </div>
       </section>
 

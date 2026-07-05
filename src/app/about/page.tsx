@@ -83,7 +83,7 @@ export default function AboutPage() {
           </div>
           <div className="fade-up" data-delay="80" style={{ display: 'grid', gap: '20px' }}>
             {[
-              { title: 'Developed at Yale', body: 'The system began at Yale Tsai City Innovation as an answer to a simple question: why don\'t student-athletes have an organized system for recruiting?' },
+              { title: 'Built from firsthand experience', body: 'The system began as an answer to a simple question, asked by an athlete who lived the process: why don\'t student-athletes have an organized system for recruiting?' },
               { title: 'Powered by CAPS', body: 'Recruiting Victory operates alongside CAPS (College Athlete Placement Standard), an institutional framework that helps high schools strengthen their recruiting infrastructure.' },
             ].map((item) => (
               <div key={item.title} style={{
