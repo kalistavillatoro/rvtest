@@ -68,7 +68,7 @@ const faqs = [
   },
   {
     q: 'How is it delivered?',
-    a: 'Instantly, as a digital dashboard you open in your browser. No software to install. You\'ll receive access right after checkout.',
+    a: 'Within 24 hours of checkout, you\'ll get an email with your own Recruiting Victory dashboard link — already set up with your name, sport, and class year — plus a short welcome video showing you how to use it. It\'s a web link, not an app to download, so you just bookmark it and return anytime.',
   },
   {
     q: 'What if we want more hands-on help?',

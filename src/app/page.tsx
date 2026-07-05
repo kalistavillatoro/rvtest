@@ -1,8 +1,46 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { STRIPE_CHECKOUT_URL } from '@/lib/site';
+
+const dashboardMockups = [
+  { src: '/jana dashboard mockup.jpg', alt: "Jana's Recruiting Victory dashboard — Swimming" },
+  { src: '/andre dashboard mockup.jpg', alt: "Andre's Recruiting Victory dashboard — Football" },
+  { src: '/layne dashboard mockup.jpg', alt: "Layne's Recruiting Victory dashboard — Lacrosse" },
+  { src: '/homepage-dashboard.jpg', alt: "A Recruiting Victory dashboard, ready for your name and sport" },
+];
+
+function DashboardCarousel() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setIndex((i) => (i + 1) % dashboardMockups.length);
+    }, 4000);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <div className="screenshot-frame" style={{ position: 'relative', aspectRatio: '0.85', backgroundColor: 'var(--bg-card)' }}>
+      {dashboardMockups.map((m, i) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          key={m.src}
+          src={m.src}
+          alt={m.alt}
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%',
+            objectFit: 'contain',
+            opacity: i === index ? 1 : 0,
+            transition: 'opacity 0.9s ease',
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 function useFadeUp() {
   const ref = useRef<HTMLDivElement>(null);
@@ -58,7 +96,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════
           HERO — one idea: recruiting, made simple
       ═══════════════════════════════════════════ */}
-      <section style={{
+      <section className="hero-section" style={{
         padding: 'clamp(140px, 20vh, 200px) 24px clamp(48px, 6vw, 72px)',
         textAlign: 'center',
       }}>
@@ -115,40 +153,18 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          PRODUCT SHOT — one large, legible example
-      ═══════════════════════════════════════════ */}
-      <section style={{ padding: '0 24px clamp(64px, 8vw, 104px)' }}>
-        <div className="fade-up" data-delay="100" style={{ maxWidth: '820px', margin: '0 auto' }}>
-          <div className="screenshot-frame">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/jana dashboard mockup.jpg"
-              alt="Example Recruiting Victory dashboard, personalized with an athlete's name and sport"
-              style={{ display: 'block', width: '100%', height: 'auto' }}
-            />
-          </div>
-          <p style={{
-            fontFamily: 'var(--font-sans)', fontSize: '13.5px',
-            color: 'var(--text-ghost)', textAlign: 'center', marginTop: '16px',
-          }}>
-            Every athlete gets their own dashboard — name, sport, and class year included.
-          </p>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
-          TRUST STRIP — quiet proof
+          TRUST STRIP — quiet proof, right up front
       ═══════════════════════════════════════════ */}
       <section style={{
         borderTop: '1px solid var(--border)',
         borderBottom: '1px solid var(--border)',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '28px 24px',
+        padding: '20px 24px',
       }}>
         <div className="fade-up" style={{
           maxWidth: '900px', margin: '0 auto',
           display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
-          gap: '12px 40px',
+          gap: '10px 32px',
         }}>
           {[
             'Founded by a Yale-recruited D1 athlete',
@@ -156,13 +172,28 @@ export default function HomePage() {
             'Placements at Yale, Princeton, Stanford & Duke',
           ].map((item) => (
             <span key={item} style={{
-              fontFamily: 'var(--font-mono)', fontSize: '12px',
-              letterSpacing: '0.08em', textTransform: 'uppercase',
+              fontFamily: 'var(--font-mono)', fontSize: '11.5px',
+              letterSpacing: '0.06em', textTransform: 'uppercase',
               color: 'var(--text-muted)',
             }}>
               {item}
             </span>
           ))}
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          PRODUCT SHOT — auto-rotating dashboard examples
+      ═══════════════════════════════════════════ */}
+      <section style={{ padding: 'clamp(48px, 7vw, 88px) 24px' }}>
+        <div className="fade-up" data-delay="100" style={{ maxWidth: '700px', margin: '0 auto' }}>
+          <DashboardCarousel />
+          <p style={{
+            fontFamily: 'var(--font-sans)', fontSize: '13.5px',
+            color: 'var(--text-ghost)', textAlign: 'center', marginTop: '16px',
+          }}>
+            Every athlete gets their own dashboard — name, sport, and class year included.
+          </p>
         </div>
       </section>
 
@@ -314,6 +345,76 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════
+          WHAT HAPPENS NEXT — remove last-minute hesitation
+      ═══════════════════════════════════════════ */}
+      <section style={{ padding: 'clamp(80px, 10vw, 128px) 24px', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <h2 className="fade-up" style={{
+            fontFamily: 'var(--font-sans)', fontWeight: 600,
+            fontSize: 'clamp(28px, 3.6vw, 40px)', letterSpacing: '-0.02em',
+            color: 'var(--text-primary)', textAlign: 'center',
+            marginBottom: 'clamp(40px, 5vw, 56px)',
+          }}>
+            What happens after you sign up
+          </h2>
+          {[
+            {
+              num: '1',
+              title: 'Check out securely',
+              body: 'Pay through Stripe — $13.99 every 4 weeks, cancel anytime.',
+            },
+            {
+              num: '2',
+              title: 'Get your dashboard within 24 hours',
+              body: 'You\'ll receive an email with your own Recruiting Victory dashboard link, already set up with your name, sport, and class year.',
+            },
+            {
+              num: '3',
+              title: 'Watch the welcome video',
+              body: 'A short walkthrough shows you exactly how to use your profile, your college tracker, and the course.',
+            },
+            {
+              num: '4',
+              title: 'Bookmark it and you\'re in',
+              body: 'It\'s a web link, not an app to download — save it and return anytime. You\'re part of the Recruiting Victory community from day one.',
+            },
+          ].map((step, i) => (
+            <div
+              key={step.num}
+              className="fade-up"
+              data-delay={i * 100}
+              style={{ display: 'flex', gap: '20px', marginBottom: '32px', alignItems: 'flex-start' }}
+            >
+              <div style={{
+                width: '32px', height: '32px', flexShrink: 0,
+                borderRadius: '50%',
+                backgroundColor: 'var(--accent-forest)',
+                color: '#FFF',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: '14px',
+              }}>
+                {step.num}
+              </div>
+              <div>
+                <h3 style={{
+                  fontFamily: 'var(--font-sans)', fontWeight: 600,
+                  fontSize: '17px', color: 'var(--text-primary)', marginBottom: '6px',
+                }}>
+                  {step.title}
+                </h3>
+                <p style={{
+                  fontFamily: 'var(--font-sans)', fontSize: '15px',
+                  lineHeight: 1.65, color: 'var(--text-muted)',
+                }}>
+                  {step.body}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
           FINAL CTA — one clear action
       ═══════════════════════════════════════════ */}
       <section style={{
@@ -336,7 +437,7 @@ export default function HomePage() {
             color: 'rgba(255,255,255,0.75)', lineHeight: 1.6,
             marginBottom: '36px',
           }}>
-            Instant access after checkout. Works for every sport, every level, anywhere in the world.
+            Your personalized dashboard arrives by email within 24 hours. Works for every sport, every level, anywhere in the world.
           </p>
           <div className="fade-up" data-delay="160">
             <a

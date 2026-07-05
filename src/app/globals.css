@@ -163,6 +163,7 @@ a { text-decoration: none; color: inherit; }
 
   .hero-ctas        { flex-direction: column !important; align-items: stretch !important; }
   .hero-ctas .btn-primary, .hero-ctas .btn-secondary { text-align: center; }
+  .hero-section     { padding-top: 108px !important; }
 
   .apply-left-col   { position: static !important; }
   .apply-form-box   { padding: 32px 24px !important; }
