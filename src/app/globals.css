@@ -131,7 +131,6 @@ a { text-decoration: none; color: inherit; }
 .screenshot-frame {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-top: 3px solid var(--accent-forest);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: var(--shadow-frame);

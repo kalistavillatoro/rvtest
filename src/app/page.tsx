@@ -115,44 +115,24 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          PRODUCT SHOT — every athlete gets their own
+          PRODUCT SHOT — one large, legible example
       ═══════════════════════════════════════════ */}
       <section style={{ padding: '0 24px clamp(64px, 8vw, 104px)' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-          <p className="fade-up" data-delay="100" style={{
-            fontFamily: 'var(--font-mono)', fontSize: '12px',
-            textTransform: 'uppercase', letterSpacing: '0.14em',
-            color: 'var(--accent-forest)', marginBottom: '32px',
-          }}>
-            Built for every athlete
-          </p>
-          <div className="outcome-grid" style={{
-            display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px',
-          }}>
-            {[
-              { img: '/andre dashboard mockup.jpg', name: 'Andre', sport: 'Football' },
-              { img: '/jana dashboard mockup.jpg', name: 'Jana', sport: 'Swimming' },
-              { img: '/layne dashboard mockup.jpg', name: 'Layne', sport: 'Lacrosse' },
-              { img: '/Jamie dashboard mockup.jpg', name: 'Jamie', sport: 'Track & XC' },
-            ].map((m, i) => (
-              <div key={m.name} className="fade-up card-lift" data-delay={i * 80}>
-                <div className="screenshot-frame" style={{ marginBottom: '12px' }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={m.img}
-                    alt={`${m.name}'s Recruiting Victory dashboard`}
-                    style={{ display: 'block', width: '100%', height: 'auto' }}
-                  />
-                </div>
-                <p style={{
-                  fontFamily: 'var(--font-sans)', fontSize: '13px',
-                  color: 'var(--text-ghost)',
-                }}>
-                  {m.name} · {m.sport}
-                </p>
-              </div>
-            ))}
+        <div className="fade-up" data-delay="100" style={{ maxWidth: '820px', margin: '0 auto' }}>
+          <div className="screenshot-frame">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/jana dashboard mockup.jpg"
+              alt="Example Recruiting Victory dashboard, personalized with an athlete's name and sport"
+              style={{ display: 'block', width: '100%', height: 'auto' }}
+            />
           </div>
+          <p style={{
+            fontFamily: 'var(--font-sans)', fontSize: '13.5px',
+            color: 'var(--text-ghost)', textAlign: 'center', marginTop: '16px',
+          }}>
+            Every athlete gets their own dashboard — name, sport, and class year included.
+          </p>
         </div>
       </section>
 
@@ -171,7 +151,7 @@ export default function HomePage() {
           gap: '12px 40px',
         }}>
           {[
-            'Built by a recruited Division I athlete',
+            'Founded by a Yale-recruited D1 athlete',
             'Backed by the CAPS framework',
             'Placements at Yale, Princeton, Stanford & Duke',
           ].map((item) => (
@@ -236,37 +216,24 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          IMAGE BAND — the one emotional moment
+          QUOTE BREAK — no single sport, no photo bias
       ═══════════════════════════════════════════ */}
-      <section style={{ position: 'relative', height: 'clamp(360px, 50vw, 520px)', overflow: 'hidden' }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/Rowing 2 - green.jpg"
-          alt=""
-          aria-hidden="true"
-          style={{
-            position: 'absolute', inset: 0,
-            width: '100%', height: '100%',
-            objectFit: 'cover', objectPosition: 'center 30%',
-            filter: 'brightness(0.72)',
-          }}
-        />
-        <div style={{
-          position: 'absolute', inset: 0,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          padding: '24px',
+      <section style={{
+        padding: 'clamp(72px, 9vw, 112px) 24px',
+        backgroundColor: 'var(--bg-secondary)',
+        borderTop: '1px solid var(--border)',
+        borderBottom: '1px solid var(--border)',
+        textAlign: 'center',
+      }}>
+        <p className="fade-up" style={{
+          fontFamily: 'var(--font-serif)', fontWeight: 400, fontStyle: 'italic',
+          fontSize: 'clamp(24px, 3.5vw, 38px)', lineHeight: 1.4,
+          color: 'var(--text-primary)', maxWidth: '680px', margin: '0 auto',
         }}>
-          <p className="fade-up" style={{
-            fontFamily: 'var(--font-serif)', fontWeight: 400, fontStyle: 'italic',
-            fontSize: 'clamp(24px, 3.5vw, 38px)', lineHeight: 1.4,
-            color: '#F5F2EA', textAlign: 'center', maxWidth: '640px',
-            textShadow: '0 2px 24px rgba(0,0,0,0.4)',
-          }}>
-            &ldquo;Talent gets you noticed.
-            <br />
-            A system gets you recruited.&rdquo;
-          </p>
-        </div>
+          &ldquo;Talent gets you noticed.
+          <br />
+          A system gets you recruited.&rdquo;
+        </p>
       </section>
 
       {/* ═══════════════════════════════════════════

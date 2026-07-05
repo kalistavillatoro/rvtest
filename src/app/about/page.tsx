@@ -55,7 +55,7 @@ export default function AboutPage() {
             fontFamily: 'var(--font-sans)', fontSize: '17px',
             lineHeight: 1.8, color: 'var(--text-secondary)', marginBottom: '24px',
           }}>
-            Recruiting Victory was built by a Division I athlete who was recruited by five universities — including programs within the Ivy League. That process, navigated across time zones, timelines, and competing academic and athletic expectations, was never as clear as it should have been.
+            Recruiting Victory was founded by a Division I athlete recruited to Yale, alongside offers from four other universities. That process, navigated across time zones, timelines, and competing academic and athletic expectations, was never as clear as it should have been.
           </p>
           <p className="fade-up" data-delay="80" style={{
             fontFamily: 'var(--font-sans)', fontSize: '17px',
@@ -83,7 +83,7 @@ export default function AboutPage() {
           </div>
           <div className="fade-up" data-delay="80" style={{ display: 'grid', gap: '20px' }}>
             {[
-              { title: 'Built from firsthand experience', body: 'The system began as an answer to a simple question, asked by an athlete who lived the process: why don\'t student-athletes have an organized system for recruiting?' },
+              { title: 'A Yale athlete’s playbook', body: 'Our founder’s own recruiting journey to Yale, and later experience refining this system through Yale’s Tsai City innovation program, shaped the structure behind Recruiting Victory.' },
               { title: 'Powered by CAPS', body: 'Recruiting Victory operates alongside CAPS (College Athlete Placement Standard), an institutional framework that helps high schools strengthen their recruiting infrastructure.' },
             ].map((item) => (
               <div key={item.title} style={{
@@ -131,19 +131,19 @@ export default function AboutPage() {
                 name: 'Twin athletes',
                 tag: 'Recruiting simultaneously',
                 result: '7 combined offers — both committed to Northwestern University',
-                note: 'The CAPS framework handled the added complexity of two athletes recruiting at once.',
+                note: 'Recruiting Victory handled the added complexity of two athletes recruiting at once.',
               },
               {
                 name: 'Late starter',
                 tag: 'First outreach senior year',
                 result: 'D1 and Ivy League offers — committed to Duke University',
-                note: 'Began the process with no prior outreach. CAPS enabled a full late-stage recruiting campaign.',
+                note: 'Began the process with no prior outreach. Recruiting Victory enabled a full late-stage recruiting campaign.',
               },
               {
                 name: 'Overcame injury',
                 tag: 'Mid-recruiting setback',
                 result: 'Offer from UC Irvine — D1 program',
-                note: 'The CAPS framework helped navigate injury disclosure and sustained coach communication successfully.',
+                note: 'Recruiting Victory helped navigate injury disclosure and sustained coach communication successfully.',
               },
             ].map((item) => (
               <div key={item.name} style={{
