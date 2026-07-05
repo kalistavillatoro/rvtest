@@ -465,7 +465,7 @@ export default function HomePage() {
             fontFamily: 'var(--font-sans)', fontSize: '13px',
             color: 'rgba(255,255,255,0.75)', marginTop: '16px',
           }}>
-            Questions first? <Link href="/apply" style={{ color: '#FFFFFF', textDecoration: 'underline' }}>Tell us about your situation</Link> and we&apos;ll point you in the right direction.
+            Questions first? <Link href="/apply" style={{ color: '#FFFFFF', textDecoration: 'underline' }}>Tell us about your situation</Link>{' '}and we&apos;ll point you in the right direction.
           </p>
         </div>
       </section>
