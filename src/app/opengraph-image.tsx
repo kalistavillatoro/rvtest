@@ -20,27 +20,10 @@ export default function OpenGraphImage() {
           fontFamily: 'sans-serif',
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 84,
-            height: 84,
-            borderRadius: 20,
-            backgroundColor: '#FDFCFA',
-            marginBottom: 44,
-          }}
-        >
-          <svg width="44" height="44" viewBox="0 0 32 32">
-            <path
-              d="M7 16.5 L13 22.5 L25 9.5"
-              fill="none"
-              stroke="#2E4A38"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+        <div style={{ display: 'flex', marginBottom: 44 }}>
+          <svg width="72" height="72" viewBox="0 0 32 32" fill="#FDFCFA">
+            <rect x="6" y="4" width="3.6" height="24" rx="1.8" />
+            <path d="M9 5.5 L27.5 10.7 L9 15.9 Z" />
           </svg>
         </div>
         <div style={{ display: 'flex', fontSize: 30, letterSpacing: 6, textTransform: 'uppercase', opacity: 0.85, marginBottom: 22 }}>

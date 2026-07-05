@@ -25,16 +25,9 @@ export default function Footer() {
           marginBottom: '28px',
         }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true">
-              <rect width="32" height="32" rx="8" fill="var(--accent-forest)" />
-              <path
-                d="M9 16.5 L14 21.5 L23.5 10.5"
-                fill="none"
-                stroke="#FDFCFA"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+            <svg width="18" height="18" viewBox="0 0 32 32" aria-hidden="true" fill="var(--accent-forest)">
+              <rect x="6" y="4" width="3.6" height="24" rx="1.8" />
+              <path d="M9 5.5 L27.5 10.7 L9 15.9 Z" />
             </svg>
             <span style={{
               fontFamily: 'var(--font-sans)',
