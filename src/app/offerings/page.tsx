@@ -28,19 +28,19 @@ const walkthrough = [
     label: 'Your Profile',
     title: 'Everything coaches need, in one place.',
     body: 'A guided profile where you enter your stats, academics, video links, and key details. Built-in guidance shows you exactly what coaches look for — so your profile is complete, professional, and easy to evaluate.',
-    placeholder: '[INSERT PROFILE DASHBOARD SCREENSHOT]',
+    image: '/my-profile.jpg',
   },
   {
     label: 'Your Colleges',
     title: 'Every school. Every conversation. Tracked.',
     body: 'Organize your target colleges and log every coach interaction. Built-in email templates take the guesswork out of outreach, and follow-up tracking makes sure no opportunity slips away.',
-    placeholder: '[INSERT COLLEGE TRACKER SCREENSHOT]',
+    image: '/my-colleges.jpg',
   },
   {
     label: 'Your Plan',
     title: 'Always know your next step.',
     body: 'A step-by-step guide through the entire recruiting process — what to do, when to do it, and why it matters. From your first email to your final decision, you\'re never guessing.',
-    placeholder: '[INSERT STEP-BY-STEP GUIDE SCREENSHOT]',
+    image: '/the-course.jpg',
   },
 ];
 
@@ -202,18 +202,12 @@ export default function ProductPage() {
                 <div className="frame-bar">
                   <span className="frame-dot" /><span className="frame-dot" /><span className="frame-dot" />
                 </div>
-                <div style={{
-                  aspectRatio: '4/3',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
-                  <span style={{
-                    fontFamily: 'var(--font-mono)', fontSize: '11px',
-                    color: 'var(--text-ghost)', letterSpacing: '0.08em',
-                    textAlign: 'center', padding: '20px', lineHeight: 1.8,
-                  }}>
-                    {item.placeholder}
-                  </span>
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  style={{ display: 'block', width: '100%', height: 'auto' }}
+                />
               </div>
             </div>
           </div>

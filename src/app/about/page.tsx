@@ -122,26 +122,26 @@ export default function AboutPage() {
           <div className="fade-up" data-delay="80" style={{ display: 'grid', gap: '16px', marginBottom: '28px' }}>
             {[
               {
-                name: 'Amaya B.',
+                name: 'International athlete',
                 tag: 'From India',
                 result: 'Offers from Yale, Princeton, Stanford & 4 other Ivy League schools',
                 note: 'Navigated the full process successfully across time zones.',
               },
               {
-                name: 'Lauren & Marella V.',
-                tag: 'Twin athletes',
+                name: 'Twin athletes',
+                tag: 'Recruiting simultaneously',
                 result: '7 combined offers — both committed to Northwestern University',
-                note: 'The CAPS framework handled the complexity of twin athletes recruiting simultaneously.',
+                note: 'The CAPS framework handled the added complexity of two athletes recruiting at once.',
               },
               {
-                name: 'Elizabeth D.',
-                tag: 'Started as a senior',
+                name: 'Late starter',
+                tag: 'First outreach senior year',
                 result: 'D1 and Ivy League offers — committed to Duke University',
                 note: 'Began the process with no prior outreach. CAPS enabled a full late-stage recruiting campaign.',
               },
               {
-                name: 'Rebecca B.',
-                tag: 'Serious injury during process',
+                name: 'Overcame injury',
+                tag: 'Mid-recruiting setback',
                 result: 'Offer from UC Irvine — D1 program',
                 note: 'The CAPS framework helped navigate injury disclosure and sustained coach communication successfully.',
               },

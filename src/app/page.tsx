@@ -117,20 +117,13 @@ export default function HomePage() {
             <div className="frame-bar">
               <span className="frame-dot" /><span className="frame-dot" /><span className="frame-dot" />
             </div>
-            <div style={{
-              aspectRatio: '16/9',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              backgroundColor: 'var(--bg-card)',
-            }}>
-              <span style={{
-                fontFamily: 'var(--font-mono)', fontSize: '12px',
-                color: 'var(--text-ghost)', letterSpacing: '0.08em',
-                textAlign: 'center', padding: '24px', lineHeight: 1.8,
-              }}>
-                [INSERT MAIN DASHBOARD SCREENSHOT]
-                <br />
-                Full recruiting dashboard — profile, colleges, and plan in one view
-              </span>
+            <div style={{ backgroundColor: 'var(--bg-card)' }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/homepage-dashboard.jpg"
+                alt="Recruiting Victory dashboard — profile, colleges, and plan in one view"
+                style={{ display: 'block', width: '100%', height: 'auto' }}
+              />
             </div>
           </div>
         </div>
