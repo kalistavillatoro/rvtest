@@ -97,7 +97,7 @@ export default function HomePage() {
           HERO — one idea: recruiting, made simple
       ═══════════════════════════════════════════ */}
       <section className="hero-section" style={{
-        padding: 'clamp(140px, 20vh, 200px) 24px clamp(48px, 6vw, 72px)',
+        padding: 'clamp(140px, 20vh, 200px) 24px clamp(28px, 4vw, 48px)',
         textAlign: 'center',
       }}>
         <div style={{ maxWidth: '780px', margin: '0 auto' }}>
@@ -159,7 +159,7 @@ export default function HomePage() {
         borderTop: '1px solid var(--border)',
         borderBottom: '1px solid var(--border)',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '20px 24px',
+        padding: '16px 24px',
       }}>
         <div className="fade-up" style={{
           maxWidth: '900px', margin: '0 auto',
@@ -167,7 +167,7 @@ export default function HomePage() {
           gap: '10px 32px',
         }}>
           {[
-            'Founded by a Yale-recruited D1 athlete',
+            'Founded by a Yale D1 athlete',
             'Backed by the CAPS framework',
             'Placements at Yale, Princeton, Stanford & Duke',
           ].map((item) => (
@@ -185,7 +185,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════
           PRODUCT SHOT — auto-rotating dashboard examples
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: 'clamp(48px, 7vw, 88px) 24px' }}>
+      <section style={{ padding: 'clamp(28px, 4vw, 44px) 24px clamp(48px, 7vw, 88px)' }}>
         <div className="fade-up" data-delay="100" style={{ maxWidth: '700px', margin: '0 auto' }}>
           <DashboardCarousel />
           <p style={{

@@ -55,7 +55,7 @@ export default function AboutPage() {
             fontFamily: 'var(--font-sans)', fontSize: '17px',
             lineHeight: 1.8, color: 'var(--text-secondary)', marginBottom: '24px',
           }}>
-            Recruiting Victory was founded by a Division I athlete recruited to Yale, alongside offers from four other universities. That process, navigated across time zones, timelines, and competing academic and athletic expectations, was never as clear as it should have been.
+            Recruiting Victory was founded by a Yale Division I athlete, recruited to Yale alongside offers from four other universities. That process, navigated across time zones, timelines, and competing academic and athletic expectations, was never as clear as it should have been.
           </p>
           <p className="fade-up" data-delay="80" style={{
             fontFamily: 'var(--font-sans)', fontSize: '17px',
