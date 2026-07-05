@@ -124,7 +124,7 @@ export default function AboutPage() {
               {
                 name: 'International athlete',
                 tag: 'From India',
-                result: 'Offers from Yale, Princeton, Stanford & 4 other Ivy League schools',
+                result: 'Offers from Yale, Princeton, and Stanford, plus 4 other Ivy League programs',
                 note: 'Navigated the full process successfully across time zones.',
               },
               {
@@ -195,6 +195,12 @@ export default function AboutPage() {
           <a href={STRIPE_CHECKOUT_URL} className="btn-primary">
             Get the System
           </a>
+          <p style={{
+            fontFamily: 'var(--font-sans)', fontSize: '13.5px', fontWeight: 500,
+            color: 'var(--text-muted)', marginTop: '14px',
+          }}>
+            $13.99 every 4 weeks · Cancel anytime
+          </p>
         </div>
 
       </div>

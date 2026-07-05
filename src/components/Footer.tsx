@@ -88,17 +88,14 @@ export default function Footer() {
             {' · '}
             <a href="/accessibility" style={{ color: 'inherit' }}>Accessibility</a>
           </span>
-          <a
-            href="mailto:caps@capsglobal.org"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
-              letterSpacing: '0.05em',
-              color: 'var(--text-ghost)',
-            }}
-          >
-            caps@capsglobal.org
-          </a>
+          <span style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            letterSpacing: '0.05em',
+            color: 'var(--text-ghost)',
+          }}>
+            © 2026 Recruiting Victory
+          </span>
         </div>
       </div>
     </footer>

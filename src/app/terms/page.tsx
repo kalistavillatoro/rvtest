@@ -1,3 +1,7 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = { title: 'Terms of Service' };
+
 const h2Style: React.CSSProperties = {
   fontFamily: 'var(--font-sans)', fontWeight: 600,
   fontSize: '22px', letterSpacing: '-0.01em',
@@ -33,7 +37,7 @@ export default function TermsPage() {
           Terms of Service
         </h1>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: 'var(--text-ghost)', marginBottom: '32px' }}>
-          Last updated: [DATE]
+          Last updated: July 5, 2026
         </p>
 
         <p style={pStyle}>
@@ -92,7 +96,7 @@ export default function TermsPage() {
 
         <h2 style={h2Style}>Governing law</h2>
         <p style={pStyle}>
-          These Terms are governed by the laws of the United States and the state in which Recruiting Victory operates, without regard to conflict-of-law principles.
+          These Terms are governed by the laws of the State of Connecticut and applicable United States federal law, without regard to conflict-of-law principles.
         </p>
 
         <h2 style={h2Style}>Changes to these Terms</h2>
@@ -102,8 +106,8 @@ export default function TermsPage() {
 
         <h2 style={h2Style}>Contact us</h2>
         <p style={pStyle}>
-          Questions about these Terms can be sent to{' '}
-          <a href="mailto:caps@capsglobal.org" style={{ color: 'var(--accent-forest)' }}>caps@capsglobal.org</a>.
+          Questions about these Terms can be sent through our{' '}
+          <a href="/apply" style={{ color: 'var(--accent-forest)' }}>contact form</a>.
         </p>
       </div>
     </div>

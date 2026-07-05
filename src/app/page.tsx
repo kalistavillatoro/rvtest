@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { STRIPE_CHECKOUT_URL } from '@/lib/site';
 
 const dashboardMockups = [
-  { src: '/jana dashboard mockup.jpg', alt: "Jana's Recruiting Victory dashboard — Swimming" },
-  { src: '/andre dashboard mockup.jpg', alt: "Andre's Recruiting Victory dashboard — Football" },
-  { src: '/layne dashboard mockup.jpg', alt: "Layne's Recruiting Victory dashboard — Lacrosse" },
+  { src: '/jana-dashboard.jpg', alt: "Jana's Recruiting Victory dashboard — Swimming" },
+  { src: '/andre-dashboard.jpg', alt: "Andre's Recruiting Victory dashboard — Football" },
+  { src: '/layne-dashboard.jpg', alt: "Layne's Recruiting Victory dashboard — Lacrosse" },
   { src: '/homepage-dashboard.jpg', alt: "A Recruiting Victory dashboard, ready for your name and sport" },
 ];
 
@@ -15,6 +15,7 @@ function DashboardCarousel() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const t = setInterval(() => {
       setIndex((i) => (i + 1) % dashboardMockups.length);
     }, 4000);
@@ -22,13 +23,14 @@ function DashboardCarousel() {
   }, []);
 
   return (
-    <div className="screenshot-frame" style={{ position: 'relative', aspectRatio: '0.85', backgroundColor: 'var(--bg-card)' }}>
+    <div className="screenshot-frame carousel-frame" style={{ position: 'relative', backgroundColor: 'var(--bg-card)' }}>
       {dashboardMockups.map((m, i) => (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           key={m.src}
           src={m.src}
           alt={m.alt}
+          loading={i === 0 ? 'eager' : 'lazy'}
           style={{
             position: 'absolute', inset: 0,
             width: '100%', height: '100%',
@@ -138,14 +140,14 @@ export default function HomePage() {
             </Link>
           </div>
           <p className="fade-up" data-delay="300" style={{
-            fontFamily: 'var(--font-sans)', fontSize: '13px',
-            color: 'var(--text-ghost)', marginTop: '20px',
+            fontFamily: 'var(--font-sans)', fontSize: '13.5px', fontWeight: 500,
+            color: 'var(--text-muted)', marginTop: '20px',
           }}>
             $13.99 every 4 weeks · Cancel anytime
           </p>
           <p className="fade-up" data-delay="320" style={{
             fontFamily: 'var(--font-sans)', fontSize: '13px',
-            color: 'var(--text-ghost)', marginTop: '4px',
+            color: 'var(--text-muted)', marginTop: '4px',
           }}>
             Every sport · Every level · U.S. &amp; international athletes
           </p>
@@ -190,7 +192,7 @@ export default function HomePage() {
           <DashboardCarousel />
           <p style={{
             fontFamily: 'var(--font-sans)', fontSize: '13.5px',
-            color: 'var(--text-ghost)', textAlign: 'center', marginTop: '16px',
+            color: 'var(--text-muted)', textAlign: 'center', marginTop: '16px',
           }}>
             Every athlete gets their own dashboard — name, sport, and class year included.
           </p>
@@ -386,14 +388,14 @@ export default function HomePage() {
               style={{ display: 'flex', gap: '20px', marginBottom: '32px', alignItems: 'flex-start' }}
             >
               <div style={{
-                width: '32px', height: '32px', flexShrink: 0,
-                borderRadius: '50%',
-                backgroundColor: 'var(--accent-forest)',
-                color: '#FFF',
+                width: '28px', height: '28px', flexShrink: 0, marginTop: '2px',
+                borderRadius: '8px',
+                border: '1.5px solid var(--accent-forest)',
+                color: 'var(--accent-forest)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: '14px',
               }}>
-                {step.num}
+                ✓
               </div>
               <div>
                 <h3 style={{
@@ -454,16 +456,16 @@ export default function HomePage() {
             </a>
           </div>
           <p className="fade-up" data-delay="190" style={{
-            fontFamily: 'var(--font-sans)', fontSize: '13px',
-            color: 'rgba(255,255,255,0.6)', marginTop: '16px',
+            fontFamily: 'var(--font-sans)', fontSize: '13.5px', fontWeight: 500,
+            color: 'rgba(255,255,255,0.85)', marginTop: '16px',
           }}>
             $13.99 every 4 weeks · Cancel anytime
           </p>
           <p className="fade-up" data-delay="220" style={{
             fontFamily: 'var(--font-sans)', fontSize: '13px',
-            color: 'rgba(255,255,255,0.55)', marginTop: '16px',
+            color: 'rgba(255,255,255,0.75)', marginTop: '16px',
           }}>
-            Questions first? <Link href="/apply" style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'underline' }}>Tell us about your situation</Link> and we&apos;ll point you in the right direction.
+            Questions first? <Link href="/apply" style={{ color: '#FFFFFF', textDecoration: 'underline' }}>Tell us about your situation</Link> and we&apos;ll point you in the right direction.
           </p>
         </div>
       </section>

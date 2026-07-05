@@ -110,7 +110,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         </span>
       </button>
       <div style={{
-        maxHeight: open ? '300px' : '0',
+        maxHeight: open ? '600px' : '0',
         overflow: 'hidden',
         transition: 'max-height 0.4s var(--ease)',
       }}>
@@ -156,7 +156,7 @@ export default function ProductPage() {
             lineHeight: 1.65, color: 'var(--text-muted)',
             maxWidth: '520px', margin: '0 auto',
           }}>
-            One purchase. One dashboard. A complete system that guides your family through recruiting from start to finish.
+            One subscription. One dashboard. A complete system that guides your family through recruiting from start to finish.
           </p>
         </div>
       </section>
@@ -265,7 +265,7 @@ export default function ProductPage() {
             {[
               {
                 quote: 'The course covered things I hadn’t even thought of and gave me tips that put me ahead of other recruits. Having it all laid out step-by-step made the whole process click.',
-                name: 'Recruited athlete, Class of 2026',
+                name: 'Recruited college athlete',
               },
               {
                 quote: 'I always recommend this to families I work with — it’s affordable, and it’s one of the only things that actually keeps high schoolers engaged with their own recruiting process.',
@@ -330,7 +330,7 @@ export default function ProductPage() {
             fontFamily: 'var(--font-sans)', fontSize: '17px',
             color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, marginBottom: '32px',
           }}>
-            Instant access after checkout. Start building your profile tonight.
+            Your personalized dashboard arrives by email within 24 hours — ready for you to start building.
           </p>
           <div className="fade-up" data-delay="160">
             <a
@@ -347,8 +347,8 @@ export default function ProductPage() {
             </a>
           </div>
           <p className="fade-up" data-delay="220" style={{
-            fontFamily: 'var(--font-sans)', fontSize: '13px',
-            color: 'rgba(255,255,255,0.6)', marginTop: '16px',
+            fontFamily: 'var(--font-sans)', fontSize: '13.5px', fontWeight: 500,
+            color: 'rgba(255,255,255,0.85)', marginTop: '16px',
           }}>
             $13.99 every 4 weeks · Cancel anytime
           </p>

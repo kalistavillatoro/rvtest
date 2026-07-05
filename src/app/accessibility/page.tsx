@@ -1,3 +1,7 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = { title: 'Accessibility Statement' };
+
 const h2Style: React.CSSProperties = {
   fontFamily: 'var(--font-sans)', fontWeight: 600,
   fontSize: '22px', letterSpacing: '-0.01em',
@@ -33,7 +37,7 @@ export default function AccessibilityPage() {
           Accessibility Statement
         </h1>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: 'var(--text-ghost)', marginBottom: '32px' }}>
-          Last updated: [DATE]
+          Last updated: July 5, 2026
         </p>
 
         <p style={pStyle}>
@@ -59,8 +63,8 @@ export default function AccessibilityPage() {
           If you experience any difficulty accessing content on this site, please let us know. We take accessibility feedback seriously and will work to address reported issues.
         </p>
         <p style={pStyle}>
-          Email us at{' '}
-          <a href="mailto:caps@capsglobal.org" style={{ color: 'var(--accent-forest)' }}>caps@capsglobal.org</a>{' '}
+          Reach us through our{' '}
+          <a href="/apply" style={{ color: 'var(--accent-forest)' }}>contact form</a>{' '}
           and describe the issue, the page you were on, and the browser or assistive technology you were using. We will respond and aim to resolve accessibility issues promptly.
         </p>
       </div>

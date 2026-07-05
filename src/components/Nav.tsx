@@ -85,7 +85,15 @@ export default function Nav() {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile: compact CTA + hamburger */}
+        <div className="nav-mobile-group" style={{ display: 'none', alignItems: 'center', gap: '14px' }}>
+          <a
+            href={STRIPE_CHECKOUT_URL}
+            className="btn-primary"
+            style={{ padding: '8px 16px', fontSize: '13px' }}
+          >
+            Get the System
+          </a>
         <button
           className="nav-hamburger"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -119,6 +127,7 @@ export default function Nav() {
             transform: menuOpen ? 'translateY(-6.5px) rotate(-45deg)' : 'none',
           }} />
         </button>
+        </div>
       </nav>
 
       {/* Mobile fullscreen menu */}

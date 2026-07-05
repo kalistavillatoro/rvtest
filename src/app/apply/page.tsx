@@ -74,31 +74,6 @@ function FocusInput({ type = 'text', name, required = false }: { type?: string; 
   );
 }
 
-function FocusSelect({ options, name, required = false }: { options: string[]; name: string; required?: boolean }) {
-  const [focused, setFocused] = useState(false);
-  return (
-    <select
-      name={name}
-      required={required}
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
-      defaultValue=""
-      style={{
-        ...inputStyle,
-        borderColor: focused ? 'var(--accent-forest)' : 'var(--border-input)',
-        transition: 'border-color 0.2s ease',
-        appearance: 'none',
-        cursor: 'pointer',
-      }}
-    >
-      <option value="" disabled>Select...</option>
-      {options.map((opt) => (
-        <option key={opt} value={opt}>{opt}</option>
-      ))}
-    </select>
-  );
-}
-
 function FocusTextarea({ rows = 3, placeholder = '', name, required = false }: { rows?: number; placeholder?: string; name: string; required?: boolean }) {
   const [focused, setFocused] = useState(false);
   return (
@@ -266,88 +241,25 @@ export default function ApplyPage() {
         }}>
           <form onSubmit={handleSubmit}>
 
-            <FormField label="Athlete's full name">
-              <FocusInput name="athlete_name" required />
-            </FormField>
-
-            <FormField label="Country of residence">
-              <FocusInput name="country" required />
-            </FormField>
-
-            <FormField label="Sport">
-              <FocusInput name="sport" required />
-            </FormField>
-
-            <FormField label="High school graduation year">
-              <FocusSelect
-                name="graduation_year"
-                required
-                options={['2026', '2027', '2028', '2029', '2030', '2031', '2032', 'Post-grad']}
-              />
-            </FormField>
-
-            <FormField
-              label="Current school (optional)"
-              subLabel="We use this to understand your current environment, not to contact your school."
-            >
-              <FocusInput name="current_school" />
-            </FormField>
-
-            <FormField label="Academic pathway">
-              <FocusSelect
-                name="academic_pathway"
-                required
-                options={[
-                  'Strong academic focus',
-                  'Balanced athlete-academic',
-                  'Athletic-primary',
-                  'Unsure',
-                ]}
-              />
-            </FormField>
-
-            <FormField label="Where are you in the recruiting process?">
-              <FocusSelect
-                name="recruiting_stage"
-                required
-                options={[
-                  "Haven't started",
-                  'Early research stage',
-                  'Actively reaching out',
-                  'In conversations with coaches',
-                  'Other',
-                ]}
-              />
-            </FormField>
-
-            <FormField label="Brief athletic background">
-              <FocusTextarea
-                name="athletic_background"
-                required
-                rows={3}
-                placeholder="Level competed, notable results, current training environment."
-              />
-            </FormField>
-
-            <FormField label="What would a meaningful outcome look like?">
-              <FocusTextarea
-                name="meaningful_outcome"
-                required
-                rows={3}
-                placeholder="There is no right answer. We use this to understand what you're working toward."
-              />
+            <FormField label="Name">
+              <FocusInput name="name" required />
             </FormField>
 
             <FormField label="Email address">
               <FocusInput name="email" type="email" required />
             </FormField>
 
-            <FormField label="Parent / guardian name (optional)">
-              <FocusInput name="guardian_name" />
+            <FormField label="Sport & graduation year">
+              <FocusInput name="sport_and_year" required />
             </FormField>
 
-            <FormField label="How did you hear about Recruiting Victory? (optional)">
-              <FocusInput name="referral_source" />
+            <FormField label="What's your question or situation?">
+              <FocusTextarea
+                name="message"
+                required
+                rows={4}
+                placeholder="Ask us anything — where you are in the process, whether the system fits, or anything else."
+              />
             </FormField>
 
             <button
@@ -385,7 +297,7 @@ export default function ApplyPage() {
                 textAlign: 'center',
                 marginBottom: '12px',
               }}>
-                Something went wrong. Please try again or email us directly at caps@capsglobal.org
+                Something went wrong. Please try again in a moment.
               </p>
             )}
 

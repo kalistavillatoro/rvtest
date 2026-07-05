@@ -1,3 +1,7 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = { title: 'Privacy Policy' };
+
 const h2Style: React.CSSProperties = {
   fontFamily: 'var(--font-sans)', fontWeight: 600,
   fontSize: '22px', letterSpacing: '-0.01em',
@@ -33,7 +37,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: 'var(--text-ghost)', marginBottom: '32px' }}>
-          Last updated: [DATE]
+          Last updated: July 5, 2026
         </p>
 
         <p style={pStyle}>
@@ -43,9 +47,9 @@ export default function PrivacyPage() {
         <h2 style={h2Style}>Information we collect</h2>
         <p style={pStyle}>We collect information in the following ways:</p>
         <ul style={{ paddingLeft: '20px', marginBottom: '14px' }}>
-          <li style={liStyle}><strong>Contact form submissions</strong> — when you submit the &ldquo;Tell us about your situation&rdquo; form, we collect the athlete&apos;s name, sport, country, academic and recruiting details, email address, and any other information you choose to share.</li>
+          <li style={liStyle}><strong>Contact form submissions</strong> — when you submit the &ldquo;Tell us about your situation&rdquo; form, we collect the name, email address, sport and graduation year you provide, along with anything you choose to share in your message.</li>
           <li style={liStyle}><strong>Account and subscription information</strong> — when you purchase the system, our payment processor (Stripe) collects your name, email, and payment details. We do not store your full payment card information ourselves.</li>
-          <li style={liStyle}><strong>Usage data</strong> — we use a privacy-focused analytics tool to understand aggregate site traffic (e.g., which pages are visited and from what general location), which does not identify you individually.</li>
+          <li style={liStyle}><strong>Usage data</strong> — we use an analytics tool to understand aggregate site traffic (e.g., which pages are visited and from what general location); we do not use it to identify you individually.</li>
         </ul>
 
         <h2 style={h2Style}>How we use information</h2>
@@ -59,7 +63,7 @@ export default function PrivacyPage() {
 
         <h2 style={h2Style}>Third-party services</h2>
         <p style={pStyle}>
-          We rely on trusted third parties to operate our site and business, including Stripe (payment processing), Formspree (contact form delivery), and Vercel (hosting and site analytics). Each of these providers processes data under its own privacy policy and security practices.
+          We rely on trusted third parties to operate our site and business, including Stripe (payment processing), Formspree (contact form delivery), our website hosting provider, and Google Analytics (aggregate site traffic measurement). Each of these providers processes data under its own privacy policy and security practices.
         </p>
 
         <h2 style={h2Style}>Student athletes and parents</h2>
@@ -74,8 +78,8 @@ export default function PrivacyPage() {
 
         <h2 style={h2Style}>Your choices</h2>
         <p style={pStyle}>
-          You may request access to, correction of, or deletion of your personal information at any time by emailing us at{' '}
-          <a href="mailto:caps@capsglobal.org" style={{ color: 'var(--accent-forest)' }}>caps@capsglobal.org</a>. You may cancel your subscription at any time through the billing management link provided at checkout or by contacting us directly.
+          You may request access to, correction of, or deletion of your personal information at any time through our{' '}
+          <a href="/apply" style={{ color: 'var(--accent-forest)' }}>contact form</a>. You may cancel your subscription at any time through the billing management link provided at checkout or by contacting us directly.
         </p>
 
         <h2 style={h2Style}>International visitors</h2>
@@ -90,8 +94,8 @@ export default function PrivacyPage() {
 
         <h2 style={h2Style}>Contact us</h2>
         <p style={pStyle}>
-          Questions about this Privacy Policy can be sent to{' '}
-          <a href="mailto:caps@capsglobal.org" style={{ color: 'var(--accent-forest)' }}>caps@capsglobal.org</a>.
+          Questions about this Privacy Policy can be sent through our{' '}
+          <a href="/apply" style={{ color: 'var(--accent-forest)' }}>contact form</a>.
         </p>
       </div>
     </div>

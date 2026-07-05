@@ -127,6 +127,12 @@ a { text-decoration: none; color: inherit; }
 }
 .nav-link:hover::after { width: 100%; }
 
+/* ── Dashboard carousel frame ────────────────────────────────────────────────── */
+.carousel-frame { aspect-ratio: 0.85; }
+@media (max-width: 768px) {
+  .carousel-frame { aspect-ratio: 1; }
+}
+
 /* ── Screenshot frame (browser-window mockup) ────────────────────────────────── */
 .screenshot-frame {
   background: var(--bg-card);
@@ -159,6 +165,7 @@ a { text-decoration: none; color: inherit; }
 
   .nav-inner          { padding: 16px 20px !important; }
   .nav-desktop-links  { display: none !important; }
+  .nav-mobile-group   { display: flex !important; }
   .nav-hamburger      { display: flex !important; }
 
   .hero-ctas        { flex-direction: column !important; align-items: stretch !important; }
