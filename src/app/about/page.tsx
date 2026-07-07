@@ -84,7 +84,7 @@ export default function AboutPage() {
           <div className="fade-up" data-delay="80" style={{ display: 'grid', gap: '20px' }}>
             {[
               { title: 'A Yale athlete’s playbook', body: 'Our founder’s own recruiting journey to Yale, and later experience refining this system through Yale’s Tsai City innovation program, shaped the structure behind Recruiting Victory.' },
-              { title: 'Our own methodology', body: 'Recruiting Victory is built on CAPS (College Athlete Placement Standard) — our own framework for organizing the recruiting process, developed from real experience and refined with every family we’ve worked with.' },
+              { title: 'Built on CAPS', body: 'Recruiting Victory is built on CAPS (College Athlete Placement Standard), a framework developed from real recruiting experience and refined with every family we’ve worked with.' },
             ].map((item) => (
               <div key={item.title} style={{
                 backgroundColor: 'var(--bg-card)',

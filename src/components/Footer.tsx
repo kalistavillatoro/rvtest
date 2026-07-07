@@ -70,7 +70,7 @@ export default function Footer() {
               color: 'var(--text-ghost)',
             }}
           >
-            Our own methodology: CAPS (College Athlete Placement Standard)
+            Built on CAPS (College Athlete Placement Standard)
           </a>
         </div>
 
